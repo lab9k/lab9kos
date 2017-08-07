@@ -45,7 +45,7 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Azure-Jef")));
+              options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
