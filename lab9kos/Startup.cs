@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -63,7 +63,7 @@ namespace lab9kos
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role,"admin"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
             });
         }
 
@@ -95,7 +95,7 @@ namespace lab9kos
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Uren}/{action=Index}/{id?}");
             });
 
             dataInitializer.InitializeData().Wait();

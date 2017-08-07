@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using lab9kos.Models;
 using lab9kos.Models.Domain;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace lab9kos.Data
 {
@@ -21,6 +22,23 @@ namespace lab9kos.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Gebruiker>(MapGebruiker);
+        }
+
+        private static void MapGebruiker(EntityTypeBuilder<Gebruiker> gebruiker)
+        {
+            gebruiker.ToTable("Gebruiker");
+            gebruiker.HasKey(g => g.Id);
+
+            gebruiker.Property(g => g.Naam)
+                .HasMaxLength(25)
+                .IsRequired();
+            gebruiker.Property(g => g.Voornaam)
+                .HasMaxLength(30)
+                .IsRequired();
+            gebruiker.Property(g => g.Email)
+                .HasMaxLength(250)
+                .IsRequired();
         }
     }
 }
