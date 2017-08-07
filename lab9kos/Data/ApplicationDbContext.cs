@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using lab9kos.Models;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace lab9kos.Data
 {
