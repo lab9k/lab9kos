@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using lab9kos.Data;
+using lab9kos.Data.Repositories;
 using lab9kos.Models;
+using lab9kos.Models.Domain;
 using lab9kos.Services;
 
 namespace lab9kos
@@ -52,6 +54,7 @@ namespace lab9kos
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IGebruikerRepository, GebruikerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
