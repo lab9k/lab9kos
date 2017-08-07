@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace lab9kos.Filters
 {
-    public class GebruikerFilter: ActionFilterAttribute
+    public class GebruikerFilter : ActionFilterAttribute
     {
         private readonly IGebruikerRepository _gebruikerRepository;
         private Gebruiker _gebruiker;
