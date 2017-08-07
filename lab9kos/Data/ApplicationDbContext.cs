@@ -33,9 +33,11 @@ namespace lab9kos.Data
             gebruiker.Property(g => g.Naam)
                 .HasMaxLength(25)
                 .IsRequired();
+            
             gebruiker.Property(g => g.Voornaam)
                 .HasMaxLength(30)
                 .IsRequired();
+            
             gebruiker.Property(g => g.Email)
                 .HasMaxLength(250)
                 .IsRequired();
