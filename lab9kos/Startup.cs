@@ -45,8 +45,7 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MysqlConnection")));
-
+                options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
