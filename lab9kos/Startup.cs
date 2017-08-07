@@ -98,7 +98,7 @@ namespace lab9kos
                     template: "{controller=Uren}/{action=Index}/{id?}");
             });
 
-            dataInitializer.InitializeData().Wait();
+            //dataInitializer.InitializeData().Wait();
         }
     }
 }
