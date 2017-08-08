@@ -2,16 +2,49 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-<div class="full-width full-height">
-    <div class="side full-height">
-        <div class="side-content full-height">
-            <span>test</span>
+<div class="full-width body-height">
+    <div class="side body-height">
+        <div class="side-content body-height">
+            <table class="rwd-table">
+                <tr>
+                    <th>Naam</th>
+                    <th>Maandag</th>
+                    <th>Dinsdag</th>
+                    <th>Woensdag</th>
+                    <th>Donderdag</th>
+                    <th>Vrijdag</th>
+                </tr>
+                <tr>
+                    <td data-th="Naam">Jef Willems</td>
+                    <td data-th="Maandag">8u</td>
+                    <td data-th="Dinsdag">8u</td>
+                    <td data-th="Woensdag">8u</td>
+                    <td data-th="Donderdag">8u</td>
+                    <td data-th="Vrijdag">8u</td>
+                </tr>
+                <tr>
+                    <td data-th="Naam">Jef Willems</td>
+                    <td data-th="Maandag">3u</td>
+                    <td data-th="Dinsdag">8u</td>
+                    <td data-th="Woensdag">5u</td>
+                    <td data-th="Donderdag">8u</td>
+                    <td data-th="Vrijdag">2u</td>
+                </tr>
+                <tr>
+                    <td data-th="Naam">Jef Willems</td>
+                    <td data-th="Maandag">1u</td>
+                    <td data-th="Dinsdag">4u</td>
+                    <td data-th="Woensdag">8u</td>
+                    <td data-th="Donderdag">8u</td>
+                    <td data-th="Vrijdag">8u</td>
+                </tr>
+            </table>
         </div>
         <div class="side-bar full-height">
             <span>test</span>
         </div>
         <div class="side-toggle">
-            <button>
+            <button class="full-height full-width">
                 <i class="material-icons">menu</i>
             </button>
         </div>
