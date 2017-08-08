@@ -1,10 +1,14 @@
-﻿namespace lab9kos.Models.Domain
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace lab9kos.Models.Domain
 {
-    public class Gebruiker
+    public class Gebruiker : IdentityUser<long>
     {
-        public long Id { get; set; }
         public string Naam { get; set; }
         public string Voornaam { get; set; }
-        public string Email { get; set; }
+        public List<Werkdag> Werkdagen { get; set; }
+
+        public List<TaakGebruiker> Taken { get; set; }
     }
 }

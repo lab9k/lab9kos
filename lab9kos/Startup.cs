@@ -45,19 +45,21 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
-            services.AddIdentity<ApplicationUser, IdentityRole>(x =>
+              options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
+              //options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
+              );
+            services.AddIdentity<Gebruiker, IdentityRole<long>>(x =>
                 {
                     x.Password.RequireNonAlphanumeric = false;
                     x.Password.RequireUppercase = false;
                     x.Password.RequireDigit = false;
+
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext, long>()
                 .AddDefaultTokenProviders();
 
-            services.AddSession();
             services.AddMvc();
-
+            services.AddSession();
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
@@ -103,7 +105,6 @@ namespace lab9kos
                     name: "default",
                     template: "{controller=Uren}/{action=Index}/{id?}");
             });
-
 
             //dataInitializer.InitializeData().Wait();
         }

@@ -1,9 +1,10 @@
 ﻿@using System.Collections.Generic
-@using lab9kos.Models.ViewModels.AccountViewModels
+@using System.Linq
+@using lab9kos.Models.Domain
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
-@model lab9kos.Models.ViewModels.AccountViewModels.LoginViewModel
-@inject SignInManager<ApplicationUser> SignInManager
+@model LoginViewModel
+@inject SignInManager<Gebruiker> SignInManager
 
 @{
     ViewData["Title"] = "Log in";

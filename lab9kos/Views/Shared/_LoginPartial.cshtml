@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using lab9kos.Models
+@using lab9kos.Models.Domain
 
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<Gebruiker> SignInManager
+@inject UserManager<Gebruiker> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
