@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace lab9kos.Controllers
 {
@@ -7,6 +8,15 @@ namespace lab9kos.Controllers
         // GET
         public IActionResult Index()
         {
+            var random = new Random();
+            if (random.NextDouble() > 0.5)
+            {
+                TempData["success"] = "Proficiat!";
+            }
+            else
+            {
+                TempData["error"] = "Damn son!";
+            }
             return View();
         }
     }

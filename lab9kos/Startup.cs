@@ -45,17 +45,17 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-              options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>(x =>
                 {
                     x.Password.RequireNonAlphanumeric = false;
                     x.Password.RequireUppercase = false;
                     x.Password.RequireDigit = false;
-
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddSession();
             services.AddMvc();
 
             // Add application services.
@@ -92,7 +92,7 @@ namespace lab9kos
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
@@ -103,6 +103,7 @@ namespace lab9kos
                     name: "default",
                     template: "{controller=Uren}/{action=Index}/{id?}");
             });
+
 
             //dataInitializer.InitializeData().Wait();
         }

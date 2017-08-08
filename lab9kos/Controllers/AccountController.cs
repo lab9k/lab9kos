@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using lab9kos.Models;
-using lab9kos.Models.AccountViewModels;
+using lab9kos.Models.ViewModels.AccountViewModels;
 using lab9kos.Services;
 
 namespace lab9kos.Controllers
