@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using lab9kos.Models;
 using lab9kos.Models.Domain;
-using lab9kos.Models.ManageViewModels;
+using lab9kos.Models.ViewModels.ManageViewModels;
 using lab9kos.Services;
 
 namespace lab9kos.Controllers
