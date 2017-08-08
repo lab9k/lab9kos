@@ -8,32 +8,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lab9kos.Data.Repositories
 {
-    public class WerkdagRepository : IWerkweekRepository
+    public class WerkweekRepository : IWerkweekRepository
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Werkweek> _werkdagen;
 
-        public WerkdagRepository(ApplicationDbContext context)
+        public WerkweekRepository(ApplicationDbContext context)
         {
             _context = context;
             _werkdagen = context.Werkweken;
         }
 
-        private static int GetIso8601WeekOfYear(DateTime time)
+        public List<Werkweek> GetByWeek(int week)
         {
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
-            {
-                time = time.AddDays(3);
-            }
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek,
-                DayOfWeek.Monday);
-        }
-
-        public List<Werkweek> GetByWeek(DateTime week)
-        {
-            int weekNummer = GetIso8601WeekOfYear(week);
-            return _werkdagen.Where(w => GetIso8601WeekOfYear(w.StartDatum) == weekNummer).ToList();
+            return _werkdagen.Where(w => w.GetWeekNummer() == week).ToList();
         }
 
         public List<Werkweek> GetByGebruiker(Gebruiker gebruiker)

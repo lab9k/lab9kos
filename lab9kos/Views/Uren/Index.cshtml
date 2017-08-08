@@ -15,30 +15,17 @@
                     <th>Donderdag</th>
                     <th>Vrijdag</th>
                 </tr>
-                <tr>
-                    <td data-th="Naam">Jef Willems</td>
-                    <td data-th="Maandag">8u</td>
-                    <td data-th="Dinsdag">8u</td>
-                    <td data-th="Woensdag">8u</td>
-                    <td data-th="Donderdag">8u</td>
-                    <td data-th="Vrijdag">8u</td>
-                </tr>
-                <tr>
-                    <td data-th="Naam">Jef Willems</td>
-                    <td data-th="Maandag">3u</td>
-                    <td data-th="Dinsdag">8u</td>
-                    <td data-th="Woensdag">5u</td>
-                    <td data-th="Donderdag">8u</td>
-                    <td data-th="Vrijdag">2u</td>
-                </tr>
-                <tr>
-                    <td data-th="Naam">Jef Willems</td>
-                    <td data-th="Maandag">1u</td>
-                    <td data-th="Dinsdag">4u</td>
-                    <td data-th="Woensdag">8u</td>
-                    <td data-th="Donderdag">8u</td>
-                    <td data-th="Vrijdag">8u</td>
-                </tr>
+                @foreach (var week in Model.Werkweken)
+                {
+                    <tr>
+                        <td data-th="Naam">@($"{week.Werknemer.Voornaam} {week.Werknemer.Naam}")</td>
+                        <td data-th="Maandag">@week.Maandag</td>
+                        <td data-th="Dinsdag">@week.Dinsdag</td>
+                        <td data-th="Woensdag">@week.Woensdag</td>
+                        <td data-th="Donderdag">@week.Donderdag</td>
+                        <td data-th="Vrijdag">@week.Vrijdag</td>
+                    </tr>
+                }
             </table>
         </div>
         <div class="side-bar full-height">

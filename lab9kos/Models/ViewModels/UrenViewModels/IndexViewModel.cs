@@ -5,6 +5,7 @@ namespace lab9kos.Models.ViewModels.UrenViewModels
 {
     public class IndexViewModel
     {
-        public ICollection<Gebruiker> Gebruikers { get; set; }
+        public int WeekNummer { get; set; }
+        public ICollection<Werkweek> Werkweken { get; set; }
     }
 }

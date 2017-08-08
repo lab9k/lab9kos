@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace lab9kos.Models.Domain
 {
-    interface IWerkweekRepository
+    public interface IWerkweekRepository
     {
-        List<Werkweek> GetByWeek(DateTime week);
+        List<Werkweek> GetByWeek(int week);
 
         List<Werkweek> GetByGebruiker(Gebruiker gebruiker);
 

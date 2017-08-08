@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
+using lab9kos.Util;
 
 namespace lab9kos.Models.Domain
 {
@@ -85,5 +87,10 @@ namespace lab9kos.Models.Domain
 
         public Gebruiker Werknemer { get; set; }
         public DateTime StartDatum { get; set; }
+
+        public int GetWeekNummer()
+        {
+            return DateUtilities.GetIso8601WeekOfYear(StartDatum);
+        }
     }
 }
