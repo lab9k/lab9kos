@@ -13,6 +13,8 @@ namespace lab9kos.Data
     public class ApplicationDbContext : IdentityDbContext<Gebruiker,IdentityRole<long>, long>
     {
         public DbSet<Gebruiker> Gebruikers { get; set; }
+        public DbSet<Werkdag> Werkdagen { get; set; }
+        public DbSet<Taak> Taken { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

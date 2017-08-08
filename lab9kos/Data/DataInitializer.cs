@@ -22,8 +22,6 @@ namespace lab9kos.Data
             if (_context.Database.EnsureCreated())
             {
                 //TODO add data
-
-
                 _context.SaveChanges();
             }
         }
