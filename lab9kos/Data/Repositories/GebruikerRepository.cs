@@ -16,9 +16,16 @@ namespace lab9kos.Data.Repositories
             _gebruikers = context.Gebruikers;
         }
 
-        public Gebruiker GetByEmail(string email) => _gebruikers.First(g => g.Email.Equals(email));
+        public Gebruiker GetByEmail(string email) => _gebruikers
+            .Include(g => g.Werkweken)
+            .Include(g => g.Taken)
+            .First(g => g.Email.Equals(email));
 
-        public IEnumerable<Gebruiker> GetAll() => _gebruikers.ToList();
+        public IEnumerable<Gebruiker> GetAll() => _gebruikers
+            .Include(g => g.Werkweken)
+            .Include(g => g.Taken)
+            .ToList();
+
         public void SaveChanges() => _context.SaveChanges();
     }
 }
