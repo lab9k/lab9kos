@@ -81,20 +81,19 @@ namespace lab9kos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Werkdag",
+                name: "WerkWeek",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AantalUren = table.Column<int>(nullable: false),
-                    Datum = table.Column<DateTime>(nullable: false),
+                    StartDatum = table.Column<DateTime>(nullable: false),
                     WerknemerId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Werkdag", x => x.Id);
+                    table.PrimaryKey("PK_WerkWeek", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Werkdag_Gebruiker_WerknemerId",
+                        name: "FK_WerkWeek_Gebruiker_WerknemerId",
                         column: x => x.WerknemerId,
                         principalTable: "Gebruiker",
                         principalColumn: "Id",
@@ -228,8 +227,8 @@ namespace lab9kos.Migrations
                 column: "TaakId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Werkdag_WerknemerId",
-                table: "Werkdag",
+                name: "IX_WerkWeek_WerknemerId",
+                table: "WerkWeek",
                 column: "WerknemerId");
 
             migrationBuilder.CreateIndex(
@@ -265,7 +264,7 @@ namespace lab9kos.Migrations
                 name: "TaakGebruiker");
 
             migrationBuilder.DropTable(
-                name: "Werkdag");
+                name: "WerkWeek");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

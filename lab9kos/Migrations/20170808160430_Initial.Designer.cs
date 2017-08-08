@@ -8,7 +8,7 @@ using lab9kos.Data;
 namespace lab9kos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170808105321_Initial")]
+    [Migration("20170808160430_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,14 +104,12 @@ namespace lab9kos.Migrations
                     b.ToTable("TaakGebruiker");
                 });
 
-            modelBuilder.Entity("lab9kos.Models.Domain.Werkdag", b =>
+            modelBuilder.Entity("lab9kos.Models.Domain.Werkweek", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AantalUren");
-
-                    b.Property<DateTime>("Datum");
+                    b.Property<DateTime>("StartDatum");
 
                     b.Property<long?>("WerknemerId");
 
@@ -119,7 +117,7 @@ namespace lab9kos.Migrations
 
                     b.HasIndex("WerknemerId");
 
-                    b.ToTable("Werkdag");
+                    b.ToTable("WerkWeek");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole<long>", b =>
@@ -239,10 +237,10 @@ namespace lab9kos.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("lab9kos.Models.Domain.Werkdag", b =>
+            modelBuilder.Entity("lab9kos.Models.Domain.Werkweek", b =>
                 {
                     b.HasOne("lab9kos.Models.Domain.Gebruiker", "Werknemer")
-                        .WithMany("Werkdagen")
+                        .WithMany("Werkweken")
                         .HasForeignKey("WerknemerId");
                 });
 
