@@ -1,13 +1,15 @@
 $text-color: #EAEAEA;
+$nav-height: 56px;
+$body-height: calc(100vh - #{$nav-height});
 
 .margin-right-10 {
   margin-right: 10px;
 }
 
 .body-content {
-  margin-top: 56px;
-  height: calc(100vh - 56px);
-  min-height: calc(100vh - 56px);
+  margin-top: $nav-height;
+  height: $body-height;
+  min-height: $body-height;
 }
 
 .full-width {
@@ -22,10 +24,11 @@ $text-color: #EAEAEA;
 .side {
   display: flex;
   flex-direction: row;
-  .side-toggle {
+  &-toggle {
     position: absolute;
     right: 5px;
-    top: calc(56px + 5px);
+    top: calc(#{$nav-height} + 5px);
+
     button {
       line-height: 0;
       width: 100%;
@@ -33,51 +36,51 @@ $text-color: #EAEAEA;
       padding: 5px;
       background-color: transparent;
       border: none;
-      i {
 
+      i {
         color: $text-color;
       }
     }
   }
-  .side-content {
+
+  &-content {
     flex-grow: 5;
     background-color: blue;
   }
-  .side-bar {
+
+  &-bar {
     position: absolute;
     right: 0;
     background-color: red;
     display: none;
-    max-height: calc(100vh - 56px);
+    max-height: $body-height;
     width: 20%;
   }
 }
 
 .temp-data {
   position: absolute;
-  top: 56px;
+  top: $nav-height;
   left: 0;
   right: 0;
   margin: 0 auto;
   width: 75%;
   display: flex;
   flex-direction: row;
+  p {
+    flex-grow: 10;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .close {
+    button {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
-
-.temp-data p {
-  flex-grow: 10;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.temp-data .close button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-
