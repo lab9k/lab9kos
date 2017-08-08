@@ -21,7 +21,7 @@ namespace lab9kos.Data.Repositories
             .Include(g => g.Taken)
             .First(g => g.Email.Equals(email));
 
-        public IEnumerable<Gebruiker> GetAll() => _gebruikers
+        public ICollection<Gebruiker> GetAll() => _gebruikers
             .Include(g => g.Werkweken)
             .Include(g => g.Taken)
             .ToList();
