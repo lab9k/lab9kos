@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using lab9kos.Models;
-using lab9kos.Models.AccountViewModels;
 using lab9kos.Models.Domain;
+using lab9kos.Models.ViewModels.AccountViewModels;
 using lab9kos.Services;
 
 namespace lab9kos.Controllers
@@ -142,7 +142,7 @@ namespace lab9kos.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(UrenController.Index), "Uren");
         }
 
         //
@@ -470,7 +470,7 @@ namespace lab9kos.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(UrenController.Index), "Uren");
             }
         }
 

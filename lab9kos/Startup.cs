@@ -59,7 +59,7 @@ namespace lab9kos
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-
+            services.AddSession();
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
@@ -94,7 +94,7 @@ namespace lab9kos
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
