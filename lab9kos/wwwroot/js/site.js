@@ -9,6 +9,12 @@
                 $(".temp-data").remove();
             });
     });
+    $('.side-toggle > button').on('click', function (event) {
+        $('.side-bar').animate({
+            width: 'toggle'
+        });
+    });
+
 });
 
 var doc = document;
