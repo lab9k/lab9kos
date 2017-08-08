@@ -9,13 +9,10 @@ namespace lab9kos.Controllers
 {
     public class UrenController : Controller
     {
-        private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IWerkweekRepository _werkweekRepository;
 
-        public UrenController(IGebruikerRepository gebruikerRepository,
-            IWerkweekRepository werkweekRepository)
+        public UrenController(IWerkweekRepository werkweekRepository)
         {
-            _gebruikerRepository = gebruikerRepository;
             _werkweekRepository = werkweekRepository;
         }
 

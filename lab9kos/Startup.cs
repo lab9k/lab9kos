@@ -45,15 +45,14 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-              options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
-              //options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
-              );
+                //    options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
+                    options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
+            );
             services.AddIdentity<Gebruiker, IdentityRole<long>>(x =>
                 {
                     x.Password.RequireNonAlphanumeric = false;
                     x.Password.RequireUppercase = false;
                     x.Password.RequireDigit = false;
-
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext, long>()
                 .AddDefaultTokenProviders();
@@ -66,6 +65,7 @@ namespace lab9kos
 
 
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+            services.AddScoped<IWerkweekRepository, WerkweekRepository>();
             services.AddScoped<GebruikerFilter>();
             services.AddTransient<DataInitializer>();
 
@@ -106,7 +106,7 @@ namespace lab9kos
                     template: "{controller=Uren}/{action=Index}/{id?}");
             });
 
-            //dataInitializer.InitializeData().Wait();
+            dataInitializer.InitializeData().Wait();
         }
     }
 }
