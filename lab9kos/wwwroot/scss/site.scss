@@ -3,6 +3,7 @@ $black: #000;
 $white: #FFF;
 $body-bg-color: #EEEEEE;
 $side-bg-color: #292b2c;
+$border-tr-color: #ddd;
 $nav-height: 54px;
 $body-height: calc(100vh - #{$nav-height});
 $toggle-button-height: 45px;
@@ -113,8 +114,8 @@ $breakpoint-alpha: 640px;
   min-width: 300px;
   box-shadow: 10px 10px 20px $side-bg-color;
   tr {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid $border-tr-color;
+    border-bottom: 1px solid $border-tr-color;
   }
 
   th {
