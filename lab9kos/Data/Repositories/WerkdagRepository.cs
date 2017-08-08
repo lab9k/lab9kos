@@ -8,14 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lab9kos.Data.Repositories
 {
-    public class WerkdagRepository : IWerkdagRepository
+    public class WerkdagRepository : IWerkweekRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly DbSet<Werkdag> _werkdagen;
+        private readonly DbSet<Werkweek> _werkdagen;
+
         public WerkdagRepository(ApplicationDbContext context)
         {
             _context = context;
-            _werkdagen = context.Werkdagen;
+            _werkdagen = context.Werkweken;
         }
 
         private static int GetIso8601WeekOfYear(DateTime time)
@@ -25,16 +26,17 @@ namespace lab9kos.Data.Repositories
             {
                 time = time.AddDays(3);
             }
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek,
+                DayOfWeek.Monday);
         }
 
-        public List<Werkdag> GetByWeek(DateTime week)
+        public List<Werkweek> GetByWeek(DateTime week)
         {
             int weekNummer = GetIso8601WeekOfYear(week);
-            return _werkdagen.Where(w => GetIso8601WeekOfYear(w.Datum) == weekNummer).ToList();
+            return _werkdagen.Where(w => GetIso8601WeekOfYear(w.StartDatum) == weekNummer).ToList();
         }
 
-        public List<Werkdag> GetByGebruiker(Gebruiker gebruiker)
+        public List<Werkweek> GetByGebruiker(Gebruiker gebruiker)
         {
             return _werkdagen.Where(w => w.Werknemer.Equals(gebruiker)).ToList();
         }
@@ -44,7 +46,7 @@ namespace lab9kos.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void AddWerkDag(Werkdag werkdag)
+        public void AddWerkDag(Werkweek werkdag)
         {
             _werkdagen.Add(werkdag);
         }

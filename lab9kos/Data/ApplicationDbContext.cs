@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace lab9kos.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Gebruiker,IdentityRole<long>, long>
+    public class ApplicationDbContext : IdentityDbContext<Gebruiker, IdentityRole<long>, long>
     {
         public DbSet<Gebruiker> Gebruikers { get; set; }
-        public DbSet<Werkdag> Werkdagen { get; set; }
         public DbSet<Taak> Taken { get; set; }
+        public DbSet<Werkweek> Werkweken { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,15 +25,21 @@ namespace lab9kos.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<Gebruiker>(MapGebruiker);
-            builder.Entity<Werkdag>(MapWerkdag);
+            builder.Entity<Werkweek>(MapWerkweek);
             builder.Entity<TaakGebruiker>(MapTaakGebruiker);
             builder.Entity<Taak>(MapTaak);
+        }
+
+        private static void MapWerkweek(EntityTypeBuilder<Werkweek> werkweek)
+        {
+            werkweek.ToTable("WerkWeek");
+            werkweek.HasKey(w => w.Id);
         }
 
         private static void MapGebruiker(EntityTypeBuilder<Gebruiker> gebruiker)
         {
             gebruiker.ToTable("Gebruiker");
-            gebruiker.HasMany(g => g.Werkdagen)
+            gebruiker.HasMany(g => g.Werkweken)
                 .WithOne(w => w.Werknemer)
                 .IsRequired(false);
 
@@ -50,18 +56,12 @@ namespace lab9kos.Data
                 .IsRequired();
         }
 
-        private static void MapWerkdag(EntityTypeBuilder<Werkdag> werkdag)
-        {
-            werkdag.ToTable("Werkdag");
-            werkdag.HasKey(w => w.Id);
-
-        }
 
         private static void MapTaakGebruiker(EntityTypeBuilder<TaakGebruiker> taakGebruiker)
         {
             //http://www.learnentityframeworkcore.com/configuration/many-to-many-relationship-configuration
 
-            taakGebruiker.HasKey(tg => new { tg.GebruikerId, tg.TaakId });
+            taakGebruiker.HasKey(tg => new {tg.GebruikerId, tg.TaakId});
             taakGebruiker.HasOne(tg => tg.Gebruiker)
                 .WithMany(g => g.Taken)
                 .HasForeignKey(tg => tg.GebruikerId);
@@ -77,7 +77,6 @@ namespace lab9kos.Data
             taak.HasKey(t => t.Id);
             taak.Property(t => t.Titel)
                 .IsRequired();
-
         }
     }
 }

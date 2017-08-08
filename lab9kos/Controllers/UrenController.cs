@@ -1,4 +1,5 @@
 ﻿using System;
+using lab9kos.Models.ViewModels.UrenViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lab9kos.Controllers
@@ -8,16 +9,8 @@ namespace lab9kos.Controllers
         // GET
         public IActionResult Index()
         {
-            var random = new Random();
-            if (random.NextDouble() > 0.5)
-            {
-                TempData["success"] = "Proficiat!";
-            }
-            else
-            {
-                TempData["error"] = "Damn son!";
-            }
-            return View();
+            var ivm = new IndexViewModel();
+            return View(ivm);
         }
     }
 }
