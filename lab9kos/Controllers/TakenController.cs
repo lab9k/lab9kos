@@ -1,4 +1,5 @@
 ﻿using System;
+using ASP;
 using lab9kos.Filters;
 using lab9kos.Models.Domain;
 using lab9kos.Models.ViewModels.TakenViewModels;
@@ -44,6 +45,30 @@ namespace lab9kos.Controllers
             var taak = _taakRepository.GetBy(ctrvm.TaakId);
             taak.SwitchNiveau(ctrvm.KolomId);
             _taakRepository.SaveChanges();
+            return Json(new {success = true});
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(AjaxFilter))]
+        public IActionResult RemoveTaak(bool isAjax, RemoveTaakViewModel rtvm)
+        {
+            if (!isAjax) throw new ArgumentException("Moet Ajax zijn");
+            try
+            {
+                var taak = _taakRepository.GetBy(rtvm.TaakId);
+                _taakRepository.RemoveTaak(taak);
+                _taakRepository.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = e.Message
+                });
+                Console.WriteLine(e);
+                throw;
+            }
             return Json(new {success = true});
         }
     }

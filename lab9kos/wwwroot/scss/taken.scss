@@ -7,14 +7,6 @@ $approved: #00B961;
   box-sizing: border-box;
 }
 
-body {
-  background: #f4f4f4;
-  font-family: 'Lato', serif;
-  font-weight: 300;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -27,6 +19,15 @@ ul {
     max-width: 1000px;
     margin: 20px auto;
     color: white;
+  }
+}
+
+.trash-taak {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  i {
+    font-size: 6em;
   }
 }
 
@@ -93,7 +94,6 @@ ul {
 .drag-inner-list {
   min-height: 50px;
 }
-
 
 .drag-item {
   margin: 10px;
