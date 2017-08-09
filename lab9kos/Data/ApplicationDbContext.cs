@@ -15,6 +15,7 @@ namespace lab9kos.Data
         public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Taak> Taken { get; set; }
         public DbSet<Werkweek> Werkweken { get; set; }
+        public DbSet<TaakGebruiker> TaakGebruikers { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -34,8 +35,6 @@ namespace lab9kos.Data
         {
             werkweek.ToTable("WerkWeek");
             werkweek.HasKey(w => w.Id);
-            
-            
         }
 
         private static void MapGebruiker(EntityTypeBuilder<Gebruiker> gebruiker)

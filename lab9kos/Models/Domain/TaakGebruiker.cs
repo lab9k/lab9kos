@@ -14,5 +14,6 @@ namespace lab9kos.Models.Domain
         public long GebruikerId { get; set; }
         public Gebruiker Gebruiker { get; set; }
 
+        
     }
 }

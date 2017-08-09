@@ -28,5 +28,10 @@ namespace lab9kos.Models.Domain
             week.Werknemer = this;
             Werkweken.Add(week);
         }
+
+        public string FullName()
+        {
+            return $"{Voornaam} {Naam}";
+        }
     }
 }

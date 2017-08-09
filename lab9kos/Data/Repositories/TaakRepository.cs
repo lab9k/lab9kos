@@ -22,7 +22,8 @@ namespace lab9kos.Data.Repositories
         }
 
         public Taak GetBy(int id) => _taken
-            .Include(w => w.Gebruikers)
+            .Include(t => t.Gebruikers)
+            .ThenInclude(t => t.Gebruiker)
             .First(w => w.Id == id);
 
         public void RemoveTaak(Taak taak)
@@ -35,6 +36,7 @@ namespace lab9kos.Data.Repositories
             return _taken
                 .Where(t => t.TaakRealisatieNiveau == niveau)
                 .Include(t => t.Gebruikers)
+                .ThenInclude(t => t.Gebruiker)
                 .ToList();
         }
 

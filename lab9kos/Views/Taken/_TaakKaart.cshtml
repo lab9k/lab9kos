@@ -11,6 +11,10 @@
                 <div class="card-header kaart-header">
                     <div>
                         <h4>@Model.Taak.Titel</h4>
+                        @foreach (var taakGebruiker in Model.Taak.Gebruikers)
+                        {
+                            <p>@taakGebruiker.Gebruiker.FullName()</p>
+                        }
                     </div>
                     <div>
                         <button class="btn btn-danger" id="popup-close">

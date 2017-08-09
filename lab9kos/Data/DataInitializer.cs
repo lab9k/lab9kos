@@ -109,6 +109,20 @@ namespace lab9kos.Data
                     Beschrijving = "dependencies opruimen, code documenteren, nog veel andere kleine dingen",
                     Titel = "Opruimen website"
                 };
+
+                var taakGebruiker = new TaakGebruiker()
+                {
+                    Gebruiker = wim,
+                    Taak = taak
+                };
+                var taakGebruiker2 = new TaakGebruiker()
+                {
+                    Gebruiker = wim1,
+                    Taak = taak
+                };
+                _context.TaakGebruikers.Add(taakGebruiker);
+                _context.TaakGebruikers.Add(taakGebruiker2);
+
                 _context.Taken.Add(taak);
                 //_context.Gebruikers.Add(wim);
                 _context.Werkweken.Add(week);
