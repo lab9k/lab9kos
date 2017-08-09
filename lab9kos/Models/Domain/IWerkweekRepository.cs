@@ -7,7 +7,7 @@ namespace lab9kos.Models.Domain
 {
     public interface IWerkweekRepository
     {
-        List<Werkweek> GetByWeek(int week);
+        List<Werkweek> GetByDate(DateTime date);
 
         List<Werkweek> GetByGebruiker(Gebruiker gebruiker);
 

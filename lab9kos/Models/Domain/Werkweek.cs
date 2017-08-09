@@ -84,5 +84,7 @@ namespace lab9kos.Models.Domain
         public DateTime StartDatum { get; set; }
 
         public int GetWeekNummer() => DateUtilities.GetIso8601WeekOfYear(StartDatum);
+
+        public int GetYear() => StartDatum.Year;
     }
 }

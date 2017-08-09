@@ -1,4 +1,6 @@
-﻿@model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
+﻿@using System.Runtime.InteropServices.ComTypes
+@using lab9kos.Util
+@model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
@@ -9,7 +11,15 @@
             <div class="week-wrapper">
                 <div class="week-selector">
                     <p>
-                        <a asp-action="Index" asp-route-week="@(Model.WeekNummer - 1)"></a>@Model.WeekNummer<a asp-action="Index" asp-route-week="@(Model.WeekNummer + 1)"></a>
+                        @{
+                            var nuWeek = DateUtilities.GetIso8601WeekOfYear(@Model.Datum);
+                            var vorige = new DateTimeOffset(@Model.Datum.AddDays(-7)).ToUnixTimeSeconds();
+                            var volgende = new DateTimeOffset(@Model.Datum.AddDays(7)).ToUnixTimeSeconds();
+
+                        }
+                        <a asp-action="Index" asp-route-unixTimeStamp="@vorige"></a>
+                        Week @nuWeek, @Model.Datum.Year
+                        <a asp-action="Index" asp-route-unixTimeStamp="@volgende"></a>
                     </p>
                 </div>
                 <table class="rwd-table">
