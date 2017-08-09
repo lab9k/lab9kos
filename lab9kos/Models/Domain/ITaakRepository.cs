@@ -8,7 +8,7 @@ namespace lab9kos.Models.Domain
     public interface ITaakRepository
     {
         void AddTaak(Taak taak);
-
+        Taak GetBy(int id);
         void RemoveTaak(Taak taak);
         List<Taak> GetAllWithNiveau(TaakRealisatieNiveau niveau);
         IEnumerable<Taak> GetAll();

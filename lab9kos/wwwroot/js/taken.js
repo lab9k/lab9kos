@@ -13,9 +13,24 @@ dragula([
     })
     .on('dragend', function (el) {
 
+        var taakId = el.children[0].getAttribute('id').substring(11);
+        console.log(taakId);
+        var viewmodel = {
+            ctrvm: {
+                KolomId: el.parentNode.getAttribute('id'),
+                TaakId: taakId
+            }
+        };
+        $.post("/Taken/ChangeTaakNiveau",
+            $.toDictionary(viewmodel),
+            function (data) {
+                console.log(data);
+                //TODO handel af.
+            });
+
+
         // remove 'is-moving' class from element after dragging has stopped
         el.classList.remove('is-moving');
-        //TODO send ajax request
         // add the 'is-moved' class for 600ms then remove it
         window.setTimeout(function () {
             el.classList.add('is-moved');

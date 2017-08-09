@@ -34,10 +34,12 @@
                             <ul class="drag-inner-list" id="2">
                                 @foreach (var dragItem in Model.InProgress)
                                 {
-                                    @Html.Partial("_TaakKaart", new TaakKaartViewModel()
-                                    {
-                                        Taak = dragItem
-                                    })
+                                    <li class="drag-item">
+                                        @Html.Partial("_TaakKaart", new TaakKaartViewModel()
+                                        {
+                                            Taak = dragItem
+                                        })
+                                    </li>
                                 }
                             </ul>
                         </li>
@@ -48,10 +50,12 @@
                             <ul class="drag-inner-list" id="3">
                                 @foreach (var dragItem in Model.NeedsReview)
                                 {
-                                    @Html.Partial("_TaakKaart", new TaakKaartViewModel()
-                                    {
-                                        Taak = dragItem
-                                    })
+                                    <li class="drag-item">
+                                        @Html.Partial("_TaakKaart", new TaakKaartViewModel()
+                                        {
+                                            Taak = dragItem
+                                        })
+                                    </li>
                                 }
                             </ul>
                         </li>
@@ -62,10 +66,12 @@
                             <ul class="drag-inner-list" id="4">
                                 @foreach (var dragItem in Model.Done)
                                 {
-                                    @Html.Partial("_TaakKaart", new TaakKaartViewModel()
-                                    {
-                                        Taak = dragItem
-                                    })
+                                    <li class="drag-item">
+                                        @Html.Partial("_TaakKaart", new TaakKaartViewModel()
+                                        {
+                                            Taak = dragItem
+                                        })
+                                    </li>
                                 }
                             </ul>
                         </li>
@@ -75,7 +81,7 @@
             </div>
         </div>
         <div class="side-bar full-height">
-            <form method="get" asp-action="Add" asp-controller="Taken">
+            <form method="post" asp-action="Add" asp-controller="Taken">
                 <button class="btn btn-outline-success" type="submit">Add Taak <i class="material-icons">note_add</i></button>
             </form>
         </div>
@@ -97,6 +103,7 @@
 {
     <script src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.min.js" integrity="sha256-55Jz3pBCF8z9jBO1qQ7cIf0L+neuPTD1u7Ytzrp2dqo="
             crossorigin="anonymous"></script>
+    <script src="~/js/toDict.js"></script>
     <script src="~/js/dragula.js"></script>
     <script src="~/js/taken.js"></script>
 }
