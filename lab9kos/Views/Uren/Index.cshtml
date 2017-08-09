@@ -13,6 +13,7 @@
                     <p>
                         @{
                             var nuWeek = DateUtilities.GetIso8601WeekOfYear(@Model.Datum);
+                            var nu = new DateTimeOffset(@Model.Datum).ToUnixTimeSeconds();
                             var vorige = new DateTimeOffset(@Model.Datum.AddDays(-7)).ToUnixTimeSeconds();
                             var volgende = new DateTimeOffset(@Model.Datum.AddDays(7)).ToUnixTimeSeconds();
 
@@ -32,6 +33,7 @@
                         <th>Vrijdag</th>
                         <th></th>
                     </tr>
+                    @{ var userHasHours = false;}
                     @foreach (var week in Model.Werkweken)
                     {
                         <tr>
@@ -47,8 +49,21 @@
                                 </a>
                             </td>
                         </tr>
+                        if (Model.currentUserId == week.Werknemer.Id)
+                        {
+                            userHasHours = true;
+                        }
+
                     }
+
                 </table>
+                @if (!userHasHours)
+                {
+                    <br />
+                    <div style="float: right">
+                        <a class="btn btn-outline-primary" asp-action="Create" asp-controller="Uren" asp-route-unixTimeStamp="@nu">Voeg uren toe</a>
+                    </div>
+                }
             </div>
         </div>
         <div class="side-bar full-height">

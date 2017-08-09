@@ -3,13 +3,16 @@
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
+    ViewData["Title"] = Model.Id.HasValue ? "Wijzig uurrooster" : "Maak uurrooster";
+    var Action = Model.Id.HasValue ? "Edit" : "Create";
 }
 <div class="full-width body-height">
     <div class="side body-height">
         <div class="side-content body-height">
-            <h1> Uren veranderen </h1>
-            <form asp-action="Edit" method="post">
+            <h1>@ViewData["Title"]</h1>
+            <form asp-action="@Action" method="post">
                 <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="DateTimeStamp"/>
                 <div class="form-group">
                     <label asp-for="Maandag"></label>
                     <input asp-for="Maandag" class="form-control"/>

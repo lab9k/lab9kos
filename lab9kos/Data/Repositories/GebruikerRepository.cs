@@ -16,6 +16,11 @@ namespace lab9kos.Data.Repositories
             _gebruikers = context.Gebruikers;
         }
 
+        public Gebruiker GetById(long id)
+        {
+            return _gebruikers.Where(g => g.Id == id).FirstOrDefault();
+        }
+
         public Gebruiker GetByEmail(string email) => _gebruikers
             .Include(g => g.Werkweken)
             .Include(g => g.Taken)
