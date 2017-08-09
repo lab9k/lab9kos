@@ -19,15 +19,15 @@ namespace lab9kos.Data.Repositories
             _werkdagen = context.Werkweken;
         }
 
-        public List<Werkweek> GetByWeek(int week)
-        {
-            return _werkdagen.Where(w => w.GetWeekNummer() == week).ToList();
-        }
+        public List<Werkweek> GetByWeek(int week) => _werkdagen
+            .Where(w => w.GetWeekNummer() == week)
+            .Include(w => w.Werknemer)
+            .ToList();
 
-        public List<Werkweek> GetByGebruiker(Gebruiker gebruiker)
-        {
-            return _werkdagen.Where(w => w.Werknemer.Equals(gebruiker)).ToList();
-        }
+        public List<Werkweek> GetByGebruiker(Gebruiker gebruiker) => _werkdagen
+            .Where(w => w.Werknemer.Equals(gebruiker))
+            .Include(w => w.Werknemer)
+            .ToList();
 
         public void SaveChanges()
         {

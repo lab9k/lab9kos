@@ -11,5 +11,10 @@ namespace lab9kos.Models.Domain
         public string Titel { get; set; }
         public string Beschrijving { get; set; }
         public List<TaakGebruiker> Gebruikers { get; set; }
+
+        public Taak()
+        {
+            Gebruikers = new List<TaakGebruiker>();
+        }
     }
 }

@@ -11,6 +11,13 @@ namespace lab9kos.Models.Domain
         public ICollection<Werkweek> Werkweken { get; set; }
         public ICollection<TaakGebruiker> Taken { get; set; }
 
+        public Gebruiker()
+        {
+            Werkweken = new List<Werkweek>();
+            Taken = new List<TaakGebruiker>();
+        }
+
+
         public Werkweek GetWerkweekMetNummer(int weekNummer)
         {
             return Werkweken.First(werkweek => werkweek.GetWeekNummer() == weekNummer);

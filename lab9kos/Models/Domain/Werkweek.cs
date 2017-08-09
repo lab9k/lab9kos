@@ -15,7 +15,6 @@ namespace lab9kos.Models.Domain
         private int _donderdag;
         private int _vrijdag;
 
-        [NotMapped]
         public int Maandag
         {
             get => _maandag;
@@ -29,7 +28,6 @@ namespace lab9kos.Models.Domain
             }
         }
 
-        [NotMapped]
         public int Dinsdag
         {
             get => _dinsdag;
@@ -43,7 +41,6 @@ namespace lab9kos.Models.Domain
             }
         }
 
-        [NotMapped]
         public int Woensdag
         {
             get => _woensdag;
@@ -57,7 +54,6 @@ namespace lab9kos.Models.Domain
             }
         }
 
-        [NotMapped]
         public int Donderdag
         {
             get => _donderdag;
@@ -71,7 +67,6 @@ namespace lab9kos.Models.Domain
             }
         }
 
-        [NotMapped]
         public int Vrijdag
         {
             get => _vrijdag;
@@ -88,9 +83,6 @@ namespace lab9kos.Models.Domain
         public Gebruiker Werknemer { get; set; }
         public DateTime StartDatum { get; set; }
 
-        public int GetWeekNummer()
-        {
-            return DateUtilities.GetIso8601WeekOfYear(StartDatum);
-        }
+        public int GetWeekNummer() => DateUtilities.GetIso8601WeekOfYear(StartDatum);
     }
 }

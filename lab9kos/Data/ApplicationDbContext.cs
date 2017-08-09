@@ -34,6 +34,8 @@ namespace lab9kos.Data
         {
             werkweek.ToTable("WerkWeek");
             werkweek.HasKey(w => w.Id);
+            
+            
         }
 
         private static void MapGebruiker(EntityTypeBuilder<Gebruiker> gebruiker)

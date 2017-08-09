@@ -22,21 +22,26 @@ namespace lab9kos.Data
             _context.Database.EnsureDeleted();
             if (_context.Database.EnsureCreated())
             {
-                Werkweek week = new Werkweek();
-                Gebruiker wim = new Gebruiker();
-                wim.Naam = "De Troyer";
-                wim.Voornaam = "Wim";
-                wim.Email = "wimdetroyer@gmail.com";
-                wim.UserName = "wimdetroyer@gmail.com";
+                var week = new Werkweek
+                {
+                    StartDatum = DateTime.Now,
+                    Maandag = 8,
+                    Dinsdag = 7,
+                    Woensdag = 8,
+                    Donderdag = 7,
+                    Vrijdag = 8
+                };
+                var wim = new Gebruiker
+                {
+                    Voornaam = "Wim",
+                    Naam = "De Troyer",
+                    Email = "wimdetroyer@gmail.com",
+                    UserName = "wimdetroyer@gmail.com"
+                };
 
                 await _userManager.CreateAsync(wim, "lollol");
-                week.StartDatum = DateTime.Now;
-                week.Maandag = 8;
-                week.Dinsdag = 7;
-                week.Woensdag = 8;
-                week.Donderdag = 7;
-                week.Werknemer = wim;
-                _context.Gebruikers.Add(wim);
+                wim.AddWerkWeek(week);
+                //_context.Gebruikers.Add(wim);
                 _context.Werkweken.Add(week);
                 _context.SaveChanges();
             }
