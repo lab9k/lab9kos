@@ -15,5 +15,11 @@ namespace lab9kos.Models.Domain
         {
             return Werkweken.First(werkweek => werkweek.GetWeekNummer() == weekNummer);
         }
+
+        public void AddWerkWeek(Werkweek week)
+        {
+            week.Werknemer = this;
+            Werkweken.Add(week);
+        }
     }
 }

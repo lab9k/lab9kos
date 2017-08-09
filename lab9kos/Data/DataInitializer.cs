@@ -27,8 +27,9 @@ namespace lab9kos.Data
                 wim.Naam = "De Troyer";
                 wim.Voornaam = "Wim";
                 wim.Email = "wimdetroyer@gmail.com";
-                wim.UserName = "wimdetroyer@gmail.com";;
-                await _userManager.CreateAsync(wim, "lol");
+                wim.UserName = "wimdetroyer@gmail.com";
+
+                await _userManager.CreateAsync(wim, "lollol");
                 week.StartDatum = DateTime.Now;
                 week.Maandag = 8;
                 week.Dinsdag = 7;
@@ -37,7 +38,6 @@ namespace lab9kos.Data
                 week.Werknemer = wim;
                 _context.Gebruikers.Add(wim);
                 _context.Werkweken.Add(week);
-                //TODO add data
                 _context.SaveChanges();
             }
         }
