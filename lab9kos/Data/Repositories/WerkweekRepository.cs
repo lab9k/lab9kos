@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using lab9kos.Models.Domain;
+using lab9kos.Util;
 using Microsoft.EntityFrameworkCore;
 
 namespace lab9kos.Data.Repositories
@@ -19,8 +20,8 @@ namespace lab9kos.Data.Repositories
             _werkdagen = context.Werkweken;
         }
 
-        public List<Werkweek> GetByWeek(int week) => _werkdagen
-            .Where(w => w.GetWeekNummer() == week)
+        public List<Werkweek> GetByDate(DateTime date) => _werkdagen
+            .Where(w => w.GetWeekNummer() == DateUtilities.GetIso8601WeekOfYear(date) && w.GetYear() == date.Year)
             .Include(w => w.Werknemer)
             .ToList();
 

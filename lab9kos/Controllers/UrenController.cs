@@ -18,13 +18,19 @@ namespace lab9kos.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int week = int.MinValue)
+        public IActionResult Index(long unixTimeStamp = 0)
         {
-            var weekNummer = week == int.MinValue ? DateUtilities.GetIso8601WeekOfYear(DateTime.Now) : week;
+            var datum = DateTime.Now;
+            if (unixTimeStamp != 0)
+            {
+                datum = DateTimeOffset.FromUnixTimeSeconds(unixTimeStamp).DateTime;
+            }
+
+
             var ivm = new IndexViewModel()
             {
-                Werkweken = _werkweekRepository.GetByWeek(weekNummer),
-                WeekNummer = weekNummer
+                Werkweken = _werkweekRepository.GetByDate(datum),
+                Datum = datum
             };
             return View(ivm);
         }
