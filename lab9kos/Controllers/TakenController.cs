@@ -1,4 +1,5 @@
-﻿using lab9kos.Filters;
+﻿using System;
+using lab9kos.Filters;
 using lab9kos.Models.Domain;
 using lab9kos.Models.ViewModels.TakenViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -28,23 +29,22 @@ namespace lab9kos.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(AjaxFilter))]
-        public IActionResult Index(bool isAjax)
-        {
-            return null;
-        }
-
-
-        [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            _taakRepository.AddTaak(Taak.CreateDummyTaak());
+            _taakRepository.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public IActionResult Add(AddViewModel avm)
+        [ServiceFilter(typeof(AjaxFilter))]
+        public IActionResult ChangeTaakNiveau(bool isAjax, ChangeTaakRealisatieViewModel ctrvm)
         {
-            return RedirectToAction(nameof(Index));
+            if (!isAjax) throw new ArgumentException("Only ajax allowed");
+            var taak = _taakRepository.GetBy(ctrvm.TaakId);
+            taak.SwitchNiveau(ctrvm.KolomId);
+            _taakRepository.SaveChanges();
+            return Json(new {success = true});
         }
     }
 }

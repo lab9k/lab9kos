@@ -68,6 +68,7 @@ namespace lab9kos
             services.AddScoped<IWerkweekRepository, WerkweekRepository>();
             services.AddScoped<ITaakRepository, TaakRepository>();
             services.AddScoped<GebruikerFilter>();
+            services.AddScoped<AjaxFilter>();
             services.AddTransient<DataInitializer>();
 
             services.AddAuthorization(options =>
@@ -107,7 +108,7 @@ namespace lab9kos
                     template: "{controller=Uren}/{action=Index}/{id?}");
             });
 
-           // dataInitializer.InitializeData().Wait();
+            dataInitializer.InitializeData().Wait();
         }
     }
 }

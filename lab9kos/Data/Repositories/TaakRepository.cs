@@ -21,6 +21,10 @@ namespace lab9kos.Data.Repositories
             _context.Add(taak);
         }
 
+        public Taak GetBy(int id) => _taken
+            .Include(w => w.Gebruikers)
+            .First(w => w.Id == id);
+
         public void RemoveTaak(Taak taak)
         {
             _context.Remove(taak);

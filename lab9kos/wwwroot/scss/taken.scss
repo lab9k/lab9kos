@@ -94,6 +94,7 @@ ul {
   min-height: 50px;
 }
 
+
 .drag-item {
   margin: 10px;
   height: 100px;
@@ -106,6 +107,21 @@ ul {
   .drag-item-inner {
     width: 100%;
     height: 100%;
+    padding: 5px;
+    font-family: "Open Sans", sans-serif;
+    display: flex;
+  }
+  &-visible {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: stretch;
+    width: 100%;
+    h5 {
+      text-align: center;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #f4f4f4;
+    }
   }
 }
 

@@ -1,0 +1,32 @@
+﻿@model lab9kos.Models.ViewModels.TakenViewModels.TaakKaartViewModel
+
+<div class="drag-item-inner" id="drag-inner-@Model.Taak.Id">
+    <div class="drag-item-visible">
+        <h5>@Model.Taak.Titel</h5>
+        <p>beschrijving?</p>
+    </div>
+    <div hidden>
+        <div id="dialog-drag-inner-@Model.Taak.Id" title="@Model.Taak.Titel">
+            <div class="card">
+                <div class="card-header kaart-header">
+                    <div>
+                        <h4>@Model.Taak.Titel</h4>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger" id="popup-close">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-block pad-5 text-right helpers">
+                    TODO: gebruikers
+                </div>
+                <div class="card-block kaart-form">
+                    <form method="post" asp-controller="" asp-action="">
+                        TODO form om dingen aan te passen
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
