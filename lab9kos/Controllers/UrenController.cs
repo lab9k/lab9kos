@@ -18,9 +18,9 @@ namespace lab9kos.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int week = int.MinValue)
         {
-            var weekNummer = DateUtilities.GetIso8601WeekOfYear(DateTime.Now);
+            var weekNummer = week == int.MinValue ? DateUtilities.GetIso8601WeekOfYear(DateTime.Now) : week;
             var ivm = new IndexViewModel()
             {
                 Werkweken = _werkweekRepository.GetByWeek(weekNummer),
@@ -49,7 +49,6 @@ namespace lab9kos.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 Werkweek week = _werkweekRepository.GetById(evm.Id);
                 week.Maandag = evm.Maandag;
                 week.Dinsdag = evm.Dinsdag;
@@ -59,11 +58,9 @@ namespace lab9kos.Controllers
                 _werkweekRepository.SaveChanges();
                 TempData["success"] = "Succesvol geëditeerd";
                 return RedirectToAction(nameof(Index));
-
             }
             else
             {
-
                 return View();
             }
         }

@@ -7,6 +7,7 @@ $border-tr-color: #ddd;
 $nav-height: 54px;
 $body-height: calc(100vh - #{$nav-height});
 $toggle-button-height: 45px;
+$breakpoint-alpha: 640px;
 
 .margin-right-10 {
   margin-right: 10px;
@@ -128,8 +129,6 @@ $toggle-button-height: 45px;
     }
   }
 }
-
-$breakpoint-alpha: 640px;
 
 .rwd-table {
   //margin: 1em 0;
