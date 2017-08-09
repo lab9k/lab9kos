@@ -127,6 +127,11 @@
   overflow: hidden; }
   .rwd-table tr {
     border-color: #46637f; }
+    .rwd-table tr td:last-child a {
+      color: #FFF;
+      text-decoration: none; }
+      .rwd-table tr td:last-child a:hover {
+        color: #ddd; }
   .rwd-table th, .rwd-table td {
     margin: .5em 1em; }
     @media (min-width: 640px) {

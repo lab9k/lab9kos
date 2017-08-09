@@ -1,6 +1,6 @@
 ﻿$(doc).ready(function () {
     $(".close button").on('click', hideTempData);
-    setTimeout(hideTempData, 1000);
+    setTimeout(hideTempData, 3000);
     $('.side-toggle > button').on('click', showSideBar);
     $("#week-search").on('change keydown paste input', filterWeekRows);
 });
@@ -26,9 +26,7 @@ function showSideBar() {
 function filterWeekRows() {
     var rows = $("td[data-th='Naam']").parent();
     var text = $('#week-search').val();
-    console.log(rows);
     for (var i = 0; i < rows.length; i++) {
-        console.log($(rows[i]));
         var rowText = $(rows[i])[0].children[0].innerText;
         if (rowText.indexOf(text) !== -1) {
             $(rows[i]).css('display', 'table-row');

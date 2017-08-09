@@ -23,7 +23,6 @@ namespace lab9kos.Controllers
             var weekNummer = DateUtilities.GetIso8601WeekOfYear(DateTime.Now);
             var ivm = new IndexViewModel()
             {
-
                 Werkweken = _werkweekRepository.GetByWeek(weekNummer),
                 WeekNummer = weekNummer
             };
@@ -69,5 +68,4 @@ namespace lab9kos.Controllers
             }
         }
     }
-
 }

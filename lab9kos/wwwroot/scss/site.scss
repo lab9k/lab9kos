@@ -190,6 +190,15 @@ $breakpoint-alpha: 640px;
 
   tr {
     border-color: lighten(#34495E, 10%);
+    td:last-child {
+      a {
+        color: $white;
+        text-decoration: none;
+        &:hover {
+          color: $border-tr-color;
+        }
+      }
+    }
   }
 
   th, td {
