@@ -66,6 +66,28 @@ $toggle-button-height: 45px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .week-wrapper {
+      p {
+        font-size: 2rem;
+        text-align: center;
+        a {
+          font-weight: bold;
+
+          &:nth-child(1) {
+            margin-right: 25px;
+            &:after {
+              content: "<";
+            }
+          }
+          &:nth-child(2) {
+            margin-left: 25px;
+            &:after {
+              content: ">";
+            }
+          }
+        }
+      }
+    }
   }
 
   &-bar {
@@ -117,7 +139,6 @@ $breakpoint-alpha: 640px;
     border-top: 1px solid $border-tr-color;
     border-bottom: 1px solid $border-tr-color;
   }
-
   th {
     display: none;
   }
@@ -158,9 +179,7 @@ $breakpoint-alpha: 640px;
         padding-right: 0;
       }
     }
-
   }
-
 }
 
 .rwd-table {
@@ -168,9 +187,11 @@ $breakpoint-alpha: 640px;
   color: #fff;
   border-radius: .4em;
   overflow: hidden;
+
   tr {
     border-color: lighten(#34495E, 10%);
   }
+
   th, td {
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {

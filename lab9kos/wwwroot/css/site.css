@@ -42,6 +42,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center; }
+    .side-content .week-wrapper p {
+      font-size: 2rem;
+      text-align: center; }
+      .side-content .week-wrapper p a {
+        font-weight: bold; }
+        .side-content .week-wrapper p a:nth-child(1) {
+          margin-right: 25px; }
+          .side-content .week-wrapper p a:nth-child(1):after {
+            content: "<"; }
+        .side-content .week-wrapper p a:nth-child(2) {
+          margin-left: 25px; }
+          .side-content .week-wrapper p a:nth-child(2):after {
+            content: ">"; }
   .side-bar {
     position: absolute;
     right: 0;
