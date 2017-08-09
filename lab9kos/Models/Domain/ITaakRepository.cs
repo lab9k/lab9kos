@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace lab9kos.Models.Domain
 {
-    interface ITaakRepository
+    public interface ITaakRepository
     {
         void AddTaak(Taak taak);
 
         void RemoveTaak(Taak taak);
-        List<Taak> GetAll();
+        List<Taak> GetAllWithNiveau(TaakRealisatieNiveau niveau);
+        IEnumerable<Taak> GetAll();
         void SaveChanges();
     }
 }

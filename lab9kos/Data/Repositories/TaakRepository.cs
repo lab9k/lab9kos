@@ -25,8 +25,16 @@ namespace lab9kos.Data.Repositories
         {
             _context.Remove(taak);
         }
-    
-        public List<Taak> GetAll()
+
+        public List<Taak> GetAllWithNiveau(TaakRealisatieNiveau niveau)
+        {
+            return _taken
+                .Where(t => t.TaakRealisatieNiveau == niveau)
+                .Include(t => t.Gebruikers)
+                .ToList();
+        }
+
+        public IEnumerable<Taak> GetAll()
         {
             return _taken.ToList();
         }

@@ -18,6 +18,7 @@
               rel="stylesheet">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
     </environment>
+    @RenderSection("StyleSheets", false)
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
@@ -27,7 +28,7 @@
     </button>
     <a class="navbar-brand" href="#">
         <img src="https://i.imgur.com/eDGCAfO.png" width="50" height="30" class="d-inline-block align-top" alt="">
-        
+
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">

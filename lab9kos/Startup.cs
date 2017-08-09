@@ -66,6 +66,7 @@ namespace lab9kos
 
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
             services.AddScoped<IWerkweekRepository, WerkweekRepository>();
+            services.AddScoped<ITaakRepository, TaakRepository>();
             services.AddScoped<GebruikerFilter>();
             services.AddTransient<DataInitializer>();
 
