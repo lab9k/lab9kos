@@ -11,6 +11,7 @@ namespace lab9kos.Models.Domain
 
         List<Werkweek> GetByGebruiker(Gebruiker gebruiker);
 
+        Werkweek GetById(long id);
         void AddWerkDag(Werkweek werkdag);
 
         void SaveChanges();

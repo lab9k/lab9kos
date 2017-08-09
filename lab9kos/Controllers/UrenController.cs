@@ -22,10 +22,40 @@ namespace lab9kos.Controllers
             var weekNummer = DateUtilities.GetIso8601WeekOfYear(DateTime.Now);
             var ivm = new IndexViewModel()
             {
+
                 Werkweken = _werkweekRepository.GetByWeek(weekNummer),
                 WeekNummer = weekNummer
             };
             return View(ivm);
         }
+
+        public IActionResult Edit(long id)
+        {
+            Werkweek week = _werkweekRepository.GetById(id);
+            var evm = new EditViewModel()
+            {
+                Id = id,
+                Maandag = week.Maandag,
+                Dinsdag = week.Dinsdag,
+                Woensdag = week.Woensdag,
+                Donderdag = week.Donderdag,
+                Vrijdag = week.Vrijdag
+            };
+            return View(evm);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditViewModel evm)
+        {
+            Werkweek week = _werkweekRepository.GetById(evm.Id);
+            week.Maandag = evm.Maandag;
+            week.Dinsdag = evm.Dinsdag;
+            week.Woensdag = evm.Woensdag;
+            week.Donderdag = evm.Donderdag;
+            week.Vrijdag = evm.Vrijdag;
+            _werkweekRepository.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
+
 }

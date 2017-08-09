@@ -1,0 +1,57 @@
+﻿@using System
+@model lab9kos.Models.ViewModels.UrenViewModels.EditViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="full-width body-height">
+    <div class="side body-height">
+        <div class="side-content body-height">
+            <h1> Uren veranderen </h1>
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Maandag"></label>
+                    <input asp-for="Maandag" class="form-control"/>
+                    <span asp-validation-for="Maandag" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dinsdag"></label>
+                    <input asp-for="Dinsdag" class="form-control"/>
+                    <span asp-validation-for="Dinsdag" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Woensdag"></label>
+                    <input asp-for="Woensdag" class="form-control"/>
+                    <span asp-validation-for="Woensdag" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Donderdag"></label>
+                    <input asp-for="Donderdag" class="form-control"/>
+                    <span asp-validation-for="Donderdag" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Vrijdag"></label>
+                    <input asp-for="Vrijdag" class="form-control"/>
+                    <span asp-validation-for="Vrijdag" class="text-danger"></span>
+
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Sla op</button>
+                    <a asp-action="Index" class="btn btn-default">Ga terug </a>
+                </div>
+            </form>
+        </div>
+        <div class="side-bar full-height">
+            <span>test</span>
+        </div>
+        <div class="side-toggle">
+            <button class="full-height full-width">
+                <i class="material-icons">menu</i>
+            </button>
+        </div>
+    </div>
+</div>
