@@ -12,25 +12,25 @@ namespace lab9kos.Data.Repositories
     public class WerkweekRepository : IWerkweekRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly DbSet<Werkweek> _werkdagen;
+        private readonly DbSet<Werkweek> _werkweken;
 
         public WerkweekRepository(ApplicationDbContext context)
         {
             _context = context;
-            _werkdagen = context.Werkweken;
+            _werkweken = context.Werkweken;
         }
 
-        public List<Werkweek> GetByDate(DateTime date) => _werkdagen
+        public List<Werkweek> GetByDate(DateTime date) => _werkweken
             .Where(w => w.GetWeekNummer() == DateUtilities.GetIso8601WeekOfYear(date) && w.GetYear() == date.Year)
             .Include(w => w.Werknemer)
             .ToList();
 
-        public List<Werkweek> GetByGebruiker(Gebruiker gebruiker) => _werkdagen
+        public List<Werkweek> GetByGebruiker(Gebruiker gebruiker) => _werkweken
             .Where(w => w.Werknemer.Equals(gebruiker))
             .Include(w => w.Werknemer)
             .ToList();
 
-        public Werkweek GetById(long id) => _werkdagen
+        public Werkweek GetById(long id) => _werkweken
             .Where(w => w.Id == id)
             .FirstOrDefault();
 
@@ -39,9 +39,9 @@ namespace lab9kos.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void AddWerkDag(Werkweek werkdag)
+        public void AddWerkWeek(Werkweek werkweek)
         {
-            _werkdagen.Add(werkdag);
+            _werkweken.Add(werkweek);
         }
     }
 }
