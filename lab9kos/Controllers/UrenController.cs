@@ -3,6 +3,7 @@ using System.Globalization;
 using lab9kos.Models.Domain;
 using lab9kos.Models.ViewModels.UrenViewModels;
 using lab9kos.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lab9kos.Controllers
@@ -47,14 +48,25 @@ namespace lab9kos.Controllers
         [HttpPost]
         public IActionResult Edit(EditViewModel evm)
         {
-            Werkweek week = _werkweekRepository.GetById(evm.Id);
-            week.Maandag = evm.Maandag;
-            week.Dinsdag = evm.Dinsdag;
-            week.Woensdag = evm.Woensdag;
-            week.Donderdag = evm.Donderdag;
-            week.Vrijdag = evm.Vrijdag;
-            _werkweekRepository.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+
+                Werkweek week = _werkweekRepository.GetById(evm.Id);
+                week.Maandag = evm.Maandag;
+                week.Dinsdag = evm.Dinsdag;
+                week.Woensdag = evm.Woensdag;
+                week.Donderdag = evm.Donderdag;
+                week.Vrijdag = evm.Vrijdag;
+                _werkweekRepository.SaveChanges();
+                TempData["success"] = "Succesvol geëditeerd";
+                return RedirectToAction(nameof(Index));
+
+            }
+            else
+            {
+
+                return View();
+            }
         }
     }
 

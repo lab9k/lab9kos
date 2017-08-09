@@ -1,6 +1,6 @@
 ﻿$(doc).ready(function () {
     $(".close button").on('click', hideTempData);
-    setTimeout(hideTempData, 500);
+    setTimeout(hideTempData, 3000);
     $('.side-toggle > button').on('click', function (event) {
         $('.side-bar').animate({
             width: 'toggle'
