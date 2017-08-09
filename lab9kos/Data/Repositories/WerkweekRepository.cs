@@ -29,6 +29,10 @@ namespace lab9kos.Data.Repositories
             .Include(w => w.Werknemer)
             .ToList();
 
+        public Werkweek GetById(long id) => _werkdagen
+            .Where(w => w.Id == id)
+            .FirstOrDefault();
+
         public void SaveChanges()
         {
             _context.SaveChanges();

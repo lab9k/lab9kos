@@ -1,4 +1,5 @@
-﻿@model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
+﻿@using System
+@model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
@@ -20,6 +21,7 @@
                         <th>Woensdag</th>
                         <th>Donderdag</th>
                         <th>Vrijdag</th>
+                        <th></th>
                     </tr>
                     @foreach (var week in Model.Werkweken)
                     {
@@ -30,6 +32,7 @@
                             <td data-th="Woensdag">@week.Woensdag</td>
                             <td data-th="Donderdag">@week.Donderdag</td>
                             <td data-th="Vrijdag">@week.Vrijdag</td>
+                            <td><a asp-action="Edit" asp-route-id=@week.Id>Bewerk</a></td>
                         </tr>
                     }
                 </table>
