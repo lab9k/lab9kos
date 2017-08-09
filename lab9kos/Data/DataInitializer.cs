@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using lab9kos.Models;
 using lab9kos.Models.Domain;
@@ -102,6 +103,13 @@ namespace lab9kos.Data
                 wim1.AddWerkWeek(week1);
                 wim2.AddWerkWeek(week2);
 
+                var taak = new Taak()
+                {
+                    TaakRealisatieNiveau = TaakRealisatieNiveau.Todo,
+                    Beschrijving = "dependencies opruimen, code documenteren, nog veel andere kleine dingen",
+                    Titel = "Opruimen website"
+                };
+                _context.Taken.Add(taak);
                 //_context.Gebruikers.Add(wim);
                 _context.Werkweken.Add(week);
                 _context.Werkweken.Add(week1);
