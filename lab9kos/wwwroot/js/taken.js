@@ -12,9 +12,28 @@ dragula([
         el.classList.add('is-moving');
     })
     .on('dragend', function (el) {
-
         var taakId = el.children[0].getAttribute('id').substring(11);
-        console.log(taakId);
+
+        if ($($(el)[0].parentNode)[0].id === '5') {
+            console.log("removing");
+            $(el).remove();
+
+
+            var viewmodel = {
+                rtvm: {
+                    TaakId: taakId
+                }
+            };
+            $.post("/Taken/RemoveTaak",
+                $.toDictionary(viewmodel),
+                function (data) {
+                    //TODO handel af.
+                    console.log(data);
+                });
+             
+            return true;
+        }
+
         var viewmodel = {
             ctrvm: {
                 KolomId: el.parentNode.getAttribute('id'),
@@ -24,8 +43,8 @@ dragula([
         $.post("/Taken/ChangeTaakNiveau",
             $.toDictionary(viewmodel),
             function (data) {
-                console.log(data);
                 //TODO handel af.
+                console.log(data);
             });
 
 
