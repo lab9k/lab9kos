@@ -1,0 +1,23 @@
+@model lab9kos.Models.ViewModels.AdminViewModels.VoegAdminToeViewModel
+@{
+    ViewData["Title"] = "VoegAdminToe";
+}
+
+
+<div class="full-width body-height">
+    <div class="side body-height">
+        <div class="side-content body-height">
+            <h2>Voeg een administrator toe </h2>
+            <form asp-action="VoegAdminToe" method="post">
+                <div asp-validation-summary="All"></div>
+                <div class="form-group">
+                    <input placeholder="Vul hier het emailadres in" asp-for="Email" type="email" class="form-control"/>
+                </div>
+                <div style="float: right">
+                    <a asp-action="Index" class="btn btn-default"> Ga Terug</a>
+                    <input type="submit" class="btn btn-primary" value="Verzend"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

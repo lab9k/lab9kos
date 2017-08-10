@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using lab9kos.Models;
 using lab9kos.Models.Domain;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace lab9kos.Data
 {
@@ -12,11 +13,40 @@ namespace lab9kos.Data
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Gebruiker> _userManager;
-
-        public DataInitializer(ApplicationDbContext context, UserManager<Gebruiker> userManager)
+        private readonly IConfiguration _configuration;
+        public DataInitializer(ApplicationDbContext context, UserManager<Gebruiker> userManager,IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
+            _configuration = configuration;
+        }
+
+        public async Task ReleaseInitializeData()
+        {
+            if (_context.Database.EnsureCreated())
+            {
+                var hans = new Gebruiker
+                {
+                    Voornaam = "Hans",
+                    Naam = "Fraiponts",
+                    Email = "hans.fraiponts@digipolis.gent",
+                    UserName = "hans.fraiponts@digipolis.gent"
+                };
+
+                var sabine = new Gebruiker
+                {
+                    Voornaam = "Sabine",
+                    Naam = "Braat",
+                    Email = "Sabine.Braat@digipolis.be",
+                    UserName = "Sabine.Braat@digipolis.be"
+                };
+                await _userManager.CreateAsync(hans, _configuration.GetSection("InitialSeedInfo").GetSection("password").Value);
+                await _userManager.CreateAsync(sabine, _configuration.GetSection("InitialSeedInfo").GetSection("password").Value);
+
+                await _userManager.AddClaimAsync(hans, new Claim(ClaimTypes.Role, "admin"));
+
+            }
+
         }
 
         public async Task InitializeData()
