@@ -10,7 +10,5 @@ namespace lab9kos.Models.ViewModels.UrenViewModels
 
         public DateTime Datum { get; set; }
         public ICollection<Werkweek> Werkweken { get; set; }
-
-        public long currentUserId { get; set; }
     }
 }

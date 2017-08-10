@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using lab9kos.Models;
 using lab9kos.Models.Domain;
@@ -72,7 +73,23 @@ namespace lab9kos.Data
                     Email = "wimd2etroyer@gmail.com",
                     UserName = "wimd2etroyer@gmail.com"
                 };
+
+
+
+                var adminGebruiker = new Gebruiker
+                {
+                    Voornaam = "Hans",
+                    Naam = "Fraiponts",
+                    Email = "hansf@gmail.com",
+                    UserName = "hansf@gmail.com"
+                };
+
+                await _userManager.CreateAsync(adminGebruiker, "hanshans");
+                await _userManager.AddClaimAsync(adminGebruiker, new Claim(ClaimTypes.Role, "admin"));
+
                 await _userManager.CreateAsync(wim, "lollol");
+                await _userManager.AddClaimAsync(wim, new Claim(ClaimTypes.Role, "admin"));
+
                 await _userManager.CreateAsync(wim1, "lollol");
                 await _userManager.CreateAsync(wim2, "lollol");
 
@@ -120,7 +137,7 @@ namespace lab9kos.Data
                     Gebruiker = wim1,
                     Taak = taak
                 };
-                _context.TaakGebruikers.Add(taakGebruiker);
+                ; _context.TaakGebruikers.Add(taakGebruiker);
                 _context.TaakGebruikers.Add(taakGebruiker2);
 
                 _context.Taken.Add(taak);

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Security;
+using System.Security.Authentication;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using lab9kos.Models.Domain;
 using lab9kos.Models.ViewModels.UrenViewModels;
@@ -16,7 +19,7 @@ namespace lab9kos.Controllers
         private readonly IWerkweekRepository _werkweekRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly UserManager<Gebruiker> _userManager;
-        public UrenController(IWerkweekRepository werkweekRepository,IGebruikerRepository gebruikerRepository, UserManager<Gebruiker> userManager)
+        public UrenController(IWerkweekRepository werkweekRepository, IGebruikerRepository gebruikerRepository, UserManager<Gebruiker> userManager)
         {
             _werkweekRepository = werkweekRepository;
             _gebruikerRepository = gebruikerRepository;
@@ -31,13 +34,11 @@ namespace lab9kos.Controllers
             {
                 datum = DateTimeOffset.FromUnixTimeSeconds(unixTimeStamp).DateTime;
             }
-           var gebruikerId = _userManager.GetUserId(User);
 
             var ivm = new IndexViewModel()
             {
                 Werkweken = _werkweekRepository.GetByDate(datum),
                 Datum = datum,
-                currentUserId = Convert.ToInt64(gebruikerId)
             };
             return View(ivm);
         }
@@ -45,6 +46,12 @@ namespace lab9kos.Controllers
         public IActionResult Edit(long id)
         {
             Werkweek week = _werkweekRepository.GetById(id);
+            if (week.Werknemer.Id != Convert.ToInt64(_userManager.GetUserId(User)) && !User.IsInRole("admin"))
+            {
+                throw new AuthenticationException("Niet geauthoriseerd");
+
+            }
+
             var evm = new EditViewModel()
             {
                 Id = id,
@@ -86,7 +93,7 @@ namespace lab9kos.Controllers
                 DateTimeStamp = unixTimeStamp
             };
             ViewData["Title"] = "Maak nieuw uurrooster";
-            return View(nameof(Edit),evm);
+            return View(nameof(Edit), evm);
         }
 
         [HttpPost]
@@ -98,7 +105,7 @@ namespace lab9kos.Controllers
                 _werkweekRepository.AddWerkWeek(week);
                 _werkweekRepository.SaveChanges();
                 TempData["success"] = "Succesvol Gemaakt!";
-                return RedirectToAction(nameof(Index),new {unixTimeStamp = evm.DateTimeStamp});
+                return RedirectToAction(nameof(Index), new { unixTimeStamp = evm.DateTimeStamp });
             }
             else
             {
