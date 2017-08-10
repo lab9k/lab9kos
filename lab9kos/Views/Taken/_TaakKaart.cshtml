@@ -1,4 +1,5 @@
-﻿@model lab9kos.Models.ViewModels.TakenViewModels.TaakKaartViewModel
+﻿@using lab9kos.Models.ViewModels.TakenViewModels
+@model lab9kos.Models.ViewModels.TakenViewModels.TaakKaartViewModel
 
 <div class="drag-item-inner" id="drag-inner-@Model.Taak.Id">
     <div class="drag-item-visible">
@@ -34,9 +35,7 @@
                     </button>
                 </div>
                 <div class="card-block">
-                    <form method="post" asp-controller="" asp-action="">
-                        TODO form om dingen aan te passen
-                    </form>
+                    @Html.Partial("_TaakUpdateForm", new TaakUpdateFormViewModel(@Model.Taak.Id, @Model.Taak.Titel, @Model.Taak.Beschrijving, @Model.Taak.TaakRealisatieNiveau))
                 </div>
             </div>
         </div>

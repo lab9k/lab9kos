@@ -38,6 +38,15 @@ namespace lab9kos.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        public IActionResult Index(AddViewModel avm)
+        {
+            //TODO
+            throw new NotSupportedException();
+        }
+
+
+        [HttpPost]
         public IActionResult Add()
         {
             _taakRepository.AddTaak(Taak.CreateDummyTaak());
