@@ -111,12 +111,13 @@ var openPopup = (function () {
 }());
 
 openPopup.init();
-
-
-$(document).ready(function () {
-    $.each($("#subscribe"), function (index, btn) {
+function addEvents() {
+    $.each($(".subscribe"), function (index, btn) {
+        console.log("subscribing to: ", $(btn));
         $(btn).on('click', function (event) {
+            $(btn).unbind('click');
             var taakId = btn.getAttribute('taak-id');
+            console.log("taakId: " + taakId);
             var viewmodel = {
                 rtvm: {
                     TaakId: taakId
@@ -126,7 +127,7 @@ $(document).ready(function () {
                 $.toDictionary(viewmodel),
                 function (data) {
                     var subBtn = $(btn);
-                    var unsubBtn = $("button#unsubscribe[taak-id=" + taakId + "]");
+                    var unsubBtn = $("button.unsubscribe[taak-id=" + taakId + "]");
 
                     subBtn[0].disabled = true;
                     subBtn[0].hidden = true;
@@ -137,9 +138,12 @@ $(document).ready(function () {
                 });
         });
     });
-    $.each($("#unsubscribe"), function (index, btn) {
+    $.each($(".unsubscribe"), function (index, btn) {
+        console.log("unsubscribing from: ", $(btn));
+        $(btn).unbind('click');
         $(btn).on('click', function (event) {
             var taakId = btn.getAttribute('taak-id');
+            console.log("taakId: " + taakId);
             var viewmodel = {
                 rtvm: {
                     TaakId: taakId
@@ -148,7 +152,7 @@ $(document).ready(function () {
             $.post("/Taken/Unsub",
                 $.toDictionary(viewmodel),
                 function (data) {
-                    var subBtn = $("button#subscribe[taak-id=" + taakId + "]");
+                    var subBtn = $("button.subscribe[taak-id=" + taakId + "]");
                     var unsubBtn = $(btn);
 
                     subBtn[0].disabled = false;
@@ -160,4 +164,8 @@ $(document).ready(function () {
                 });
         });
     });
+}
+
+$(document).ready(function () {
+    addEvents();
 });

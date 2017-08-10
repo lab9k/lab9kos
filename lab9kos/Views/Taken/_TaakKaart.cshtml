@@ -26,10 +26,10 @@
                     @{
                         var isInTaak = Model.Taak.Gebruikers.Select(g => g.GebruikerId).ToList().Contains(Model.CurrentUserId);
                     }
-                    <button hidden="@(!isInTaak)" disabled="@(!isInTaak)" id="unsubscribe" taak-id="@Model.Taak.Id" class="btn btn-outline-danger">
+                    <button hidden="@(!isInTaak)" disabled="@(!isInTaak)" taak-id="@Model.Taak.Id" class="btn btn-outline-danger unsubscribe">
                         <i class="material-icons">thumb_down</i>
                     </button>
-                    <button hidden="@isInTaak" disabled="@isInTaak" id="subscribe" taak-id="@Model.Taak.Id" class="btn btn-outline-success">
+                    <button hidden="@isInTaak" disabled="@isInTaak" taak-id="@Model.Taak.Id" class="btn btn-outline-success subscribe">
                         <i class="material-icons">thumb_up</i>
                     </button>
                 </div>
