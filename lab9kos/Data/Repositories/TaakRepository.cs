@@ -31,6 +31,11 @@ namespace lab9kos.Data.Repositories
             _context.Remove(taak);
         }
 
+        public void RemoveTaakGebruiker(TaakGebruiker taakGebruiker)
+        {
+            _context.Remove(taakGebruiker);
+        }
+
         public List<Taak> GetAllWithNiveau(TaakRealisatieNiveau niveau)
         {
             return _taken

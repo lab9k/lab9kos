@@ -65,6 +65,13 @@
     color: #EAEAEA;
     max-height: calc(100vh - 54px); }
 
+a i {
+  text-decoration: none; }
+
+a:visited {
+  text-decoration: none;
+  color: inherit; }
+
 .temp-data {
   position: absolute;
   top: 54px;

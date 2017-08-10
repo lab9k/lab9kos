@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using ASP;
 using lab9kos.Filters;
 using lab9kos.Models.Domain;
 using lab9kos.Models.ViewModels.TakenViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lab9kos.Controllers
@@ -10,13 +14,16 @@ namespace lab9kos.Controllers
     public class TakenController : Controller
     {
         private readonly ITaakRepository _taakRepository;
+        private readonly UserManager<Gebruiker> _userManager;
 
-        public TakenController(ITaakRepository taakRepository)
+        public TakenController(ITaakRepository taakRepository, UserManager<Gebruiker> userManager)
         {
             _taakRepository = taakRepository;
+            _userManager = userManager;
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Index()
         {
             var ivm = new IndexViewModel()
@@ -24,7 +31,8 @@ namespace lab9kos.Controllers
                 Todo = _taakRepository.GetAllWithNiveau(TaakRealisatieNiveau.Todo),
                 InProgress = _taakRepository.GetAllWithNiveau(TaakRealisatieNiveau.Inprogress),
                 NeedsReview = _taakRepository.GetAllWithNiveau(TaakRealisatieNiveau.Needsreview),
-                Done = _taakRepository.GetAllWithNiveau(TaakRealisatieNiveau.Done)
+                Done = _taakRepository.GetAllWithNiveau(TaakRealisatieNiveau.Done),
+                CurrentUserId = long.Parse(_userManager.GetUserId(User))
             };
             return View(ivm);
         }
@@ -66,10 +74,56 @@ namespace lab9kos.Controllers
                     success = false,
                     message = e.Message
                 });
-                Console.WriteLine(e);
-                throw;
             }
             return Json(new {success = true});
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(AjaxFilter))]
+        public async Task<IActionResult> Sub(bool isAjax, RemoveTaakViewModel rtvm)
+        {
+            if (!isAjax) throw new ArgumentException("Moet Ajax zijn");
+            try
+            {
+                var taak = _taakRepository.GetBy(rtvm.TaakId);
+                var user = await _userManager.GetUserAsync(User);
+                taak.AddGebruiker(user);
+                _taakRepository.SaveChanges();
+
+                return PartialView("_TaakGebruikers", taak.Gebruikers.Select(t => t.Gebruiker));
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = e.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(AjaxFilter))]
+        public async Task<IActionResult> Unsub(bool isAjax, RemoveTaakViewModel rtvm)
+        {
+            if (!isAjax) throw new ArgumentException("Moet Ajax zijn");
+            try
+            {
+                var taak = _taakRepository.GetBy(rtvm.TaakId);
+                var user = await _userManager.GetUserAsync(User);
+                _taakRepository.RemoveTaakGebruiker(taak.Gebruikers.First(g => g.GebruikerId == user.Id));
+                _taakRepository.SaveChanges();
+
+                return PartialView("_TaakGebruikers", taak.Gebruikers.Select(t => t.Gebruiker));
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = e.Message
+                });
+            }
         }
     }
 }

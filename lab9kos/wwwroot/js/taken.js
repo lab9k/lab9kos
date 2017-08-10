@@ -30,7 +30,7 @@ dragula([
                     //TODO handel af.
                     console.log(data);
                 });
-             
+
             return true;
         }
 
@@ -111,3 +111,53 @@ var openPopup = (function () {
 }());
 
 openPopup.init();
+
+
+$(document).ready(function () {
+    $.each($("#subscribe"), function (index, btn) {
+        $(btn).on('click', function (event) {
+            var taakId = btn.getAttribute('taak-id');
+            var viewmodel = {
+                rtvm: {
+                    TaakId: taakId
+                }
+            };
+            $.post("/Taken/Sub",
+                $.toDictionary(viewmodel),
+                function (data) {
+                    var subBtn = $(btn);
+                    var unsubBtn = $("button#unsubscribe[taak-id=" + taakId + "]");
+
+                    subBtn[0].disabled = true;
+                    subBtn[0].hidden = true;
+                    unsubBtn[0].disabled = false;
+                    unsubBtn[0].hidden = false;
+                    console.log(data);
+                    $(".taak-users-" + taakId).html(data);
+                });
+        });
+    });
+    $.each($("#unsubscribe"), function (index, btn) {
+        $(btn).on('click', function (event) {
+            var taakId = btn.getAttribute('taak-id');
+            var viewmodel = {
+                rtvm: {
+                    TaakId: taakId
+                }
+            };
+            $.post("/Taken/Unsub",
+                $.toDictionary(viewmodel),
+                function (data) {
+                    var subBtn = $("button#subscribe[taak-id=" + taakId + "]");
+                    var unsubBtn = $(btn);
+
+                    subBtn[0].disabled = false;
+                    subBtn[0].hidden = false;
+                    unsubBtn[0].disabled = true;
+                    unsubBtn[0].hidden = true;
+                    console.log(data);
+                    $(".taak-users-" + taakId).html(data);
+                });
+        });
+    });
+});

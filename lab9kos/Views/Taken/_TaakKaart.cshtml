@@ -8,13 +8,10 @@
     <div hidden>
         <div id="dialog-drag-inner-@Model.Taak.Id" title="@Model.Taak.Titel">
             <div class="card">
-                <div class="card-header kaart-header">
+                <div class="card-header">
                     <div>
                         <h4>@Model.Taak.Titel</h4>
-                        @foreach (var taakGebruiker in Model.Taak.Gebruikers)
-                        {
-                            <p>@taakGebruiker.Gebruiker.FullName()</p>
-                        }
+
                     </div>
                     <div>
                         <button class="btn btn-danger" id="popup-close">
@@ -22,10 +19,21 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-block pad-5 text-right helpers">
-                    TODO: gebruikers
+                <div class="card-block">
+                    <div class="taak-users-@Model.Taak.Id">
+                        @Html.Partial("_TaakGebruikers", Model.Taak.Gebruikers.Select(t => t.Gebruiker))
+                    </div>
+                    @{
+                        var isInTaak = Model.Taak.Gebruikers.Select(g => g.GebruikerId).ToList().Contains(Model.CurrentUserId);
+                    }
+                    <button hidden="@(!isInTaak)" disabled="@(!isInTaak)" id="unsubscribe" taak-id="@Model.Taak.Id" class="btn btn-outline-danger">
+                        <i class="material-icons">thumb_down</i>
+                    </button>
+                    <button hidden="@isInTaak" disabled="@isInTaak" id="subscribe" taak-id="@Model.Taak.Id" class="btn btn-outline-success">
+                        <i class="material-icons">thumb_up</i>
+                    </button>
                 </div>
-                <div class="card-block kaart-form">
+                <div class="card-block">
                     <form method="post" asp-controller="" asp-action="">
                         TODO form om dingen aan te passen
                     </form>

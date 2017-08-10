@@ -1,0 +1,6 @@
+﻿@model IEnumerable<lab9kos.Models.Domain.Gebruiker>
+
+@foreach (var taakGebruiker in Model)
+{
+    <p>@taakGebruiker.FullName()</p>
+}

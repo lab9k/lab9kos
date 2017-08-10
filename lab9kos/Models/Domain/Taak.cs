@@ -51,5 +51,15 @@ namespace lab9kos.Models.Domain
                     break;
             }
         }
+
+        public void AddGebruiker(Gebruiker user)
+        {
+            Gebruikers.Add(new TaakGebruiker()
+            {
+                Gebruiker = user,
+                Taak = this,
+            });
+        }
+
     }
 }

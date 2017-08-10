@@ -9,6 +9,7 @@ namespace lab9kos.Models.ViewModels.TakenViewModels
         public IEnumerable<Taak> InProgress { get; set; }
         public IEnumerable<Taak> NeedsReview { get; set; }
         public IEnumerable<Taak> Done { get; set; }
+        public long CurrentUserId { get; set; }
 
         public IndexViewModel()
         {

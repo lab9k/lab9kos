@@ -10,6 +10,7 @@ namespace lab9kos.Models.Domain
         void AddTaak(Taak taak);
         Taak GetBy(int id);
         void RemoveTaak(Taak taak);
+        void RemoveTaakGebruiker(TaakGebruiker taakGebruiker);
         List<Taak> GetAllWithNiveau(TaakRealisatieNiveau niveau);
         IEnumerable<Taak> GetAll();
         void SaveChanges();
