@@ -157,3 +157,7 @@ ul {
       justify-content: center;
       align-items: center;
       flex-direction: column; }
+
+.children-invisible * {
+  display: none;
+  visibility: hidden; }

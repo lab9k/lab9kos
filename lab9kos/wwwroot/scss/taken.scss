@@ -213,3 +213,10 @@ ul {
     }
   }
 }
+
+.children-invisible {
+  * {
+    display: none;
+    visibility: hidden;
+  }
+}

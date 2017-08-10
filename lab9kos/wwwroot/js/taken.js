@@ -30,7 +30,7 @@ dragula([
                     //TODO handel af.
                     console.log(data);
                 });
-
+             
             return true;
         }
 
