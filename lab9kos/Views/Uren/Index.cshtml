@@ -1,5 +1,11 @@
-﻿@using System.Runtime.InteropServices.ComTypes
+﻿@using System
+@using System.Runtime.InteropServices.ComTypes
+@using System.Xml
+@using lab9kos.Models.Domain
 @using lab9kos.Util
+@using Microsoft.AspNetCore.Http
+@inject UserManager<Gebruiker> UserManager
+
 @model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
 @{
     ViewBag.Title = "title";
@@ -8,6 +14,7 @@
 <div class="full-width body-height">
     <div class="side body-height">
         <div class="side-content body-height">
+
             <div class="week-wrapper">
                 <div class="week-selector">
                     <p>
@@ -16,8 +23,8 @@
                             var nu = new DateTimeOffset(@Model.Datum).ToUnixTimeSeconds();
                             var vorige = new DateTimeOffset(@Model.Datum.AddDays(-7)).ToUnixTimeSeconds();
                             var volgende = new DateTimeOffset(@Model.Datum.AddDays(7)).ToUnixTimeSeconds();
-
                         }
+
                         <a asp-action="Index" asp-route-unixTimeStamp="@vorige"></a>
                         Week @nuWeek, @Model.Datum.Year
                         <a asp-action="Index" asp-route-unixTimeStamp="@volgende"></a>
@@ -44,12 +51,14 @@
                             <td data-th="Donderdag">@week.Donderdag</td>
                             <td data-th="Vrijdag">@week.Vrijdag</td>
                             <td>
+                                @if(User.IsInRole("admin") || Convert.ToInt64(UserManager.GetUserId(User)) == week.Werknemer.Id){
                                 <a asp-action="Edit" asp-route-id=@week.Id>
                                     <i class="white material-icons">mode_edit</i>
                                 </a>
+                                }
                             </td>
                         </tr>
-                        if (Model.currentUserId == week.Werknemer.Id)
+                        if (Convert.ToInt64(@UserManager.GetUserId(User)) == week.Werknemer.Id)
                         {
                             userHasHours = true;
                         }

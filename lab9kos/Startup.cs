@@ -45,8 +45,8 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                // options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
-                    options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
+                 options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
+                //    options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
             );
             services.AddIdentity<Gebruiker, IdentityRole<long>>(x =>
                 {
@@ -73,7 +73,7 @@ namespace lab9kos
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role,"admin"));
             });
         }
 
