@@ -21,7 +21,7 @@ namespace lab9kos.Data.Repositories
             _context.Add(taak);
         }
 
-        public Taak GetBy(int id) => _taken
+        public Taak GetBy(long id) => _taken
             .Include(t => t.Gebruikers)
             .ThenInclude(t => t.Gebruiker)
             .First(w => w.Id == id);

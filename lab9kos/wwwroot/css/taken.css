@@ -7,7 +7,8 @@ ul {
   padding: 0; }
 
 .kanban {
-  width: 100%; }
+  width: 100%;
+  flex-grow: 2; }
   .kanban .drag-container {
     max-width: 1000px;
     margin: 20px auto;
@@ -69,8 +70,8 @@ ul {
 
 .drag-item {
   margin: 10px;
-  height: 100px;
   background: rgba(0, 0, 0, 0.5);
+  min-height: 100px;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
   .drag-item.is-moving {
     transform: scale(1.5);

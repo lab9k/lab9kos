@@ -4,7 +4,7 @@
 <div class="drag-item-inner" id="drag-inner-@Model.Taak.Id">
     <div class="drag-item-visible">
         <h5>@Model.Taak.Titel</h5>
-        <p>beschrijving?</p>
+        <p>@Model.Taak.Beschrijving</p>
     </div>
     <div hidden>
         <div id="dialog-drag-inner-@Model.Taak.Id" title="@Model.Taak.Titel">
@@ -35,7 +35,12 @@
                     </button>
                 </div>
                 <div class="card-block">
-                    @Html.Partial("_TaakUpdateForm", new TaakUpdateFormViewModel(@Model.Taak.Id, @Model.Taak.Titel, @Model.Taak.Beschrijving, @Model.Taak.TaakRealisatieNiveau))
+                    @Html.Partial("_TaakUpdateForm", new TaakUpdateFormViewModel()
+                    {
+                        Id = Model.Taak.Id,
+                        Titel = Model.Taak.Titel,
+                        Beschrijving = Model.Taak.Beschrijving
+                    })
                 </div>
             </div>
         </div>

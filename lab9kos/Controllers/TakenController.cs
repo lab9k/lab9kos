@@ -39,10 +39,27 @@ namespace lab9kos.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Index(AddViewModel avm)
+        public IActionResult Index(TaakUpdateFormViewModel tufvm)
         {
-            //TODO
-            throw new NotSupportedException();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var taakToUpdate = _taakRepository.GetBy(tufvm.Id);
+                    taakToUpdate.Titel = tufvm.Titel;
+                    taakToUpdate.Beschrijving = tufvm.Beschrijving;
+                    _taakRepository.SaveChanges();
+                    TempData["success"] = "success!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    TempData["error"] = "er is iets misgegaan, raadpleeg Jef";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            TempData["error"] = "er is iets misgegaan, raadpleeg Jef";
+            return RedirectToAction(nameof(Index));
         }
 
 

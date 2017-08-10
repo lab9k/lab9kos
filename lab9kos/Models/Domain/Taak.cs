@@ -60,6 +60,5 @@ namespace lab9kos.Models.Domain
                 Taak = this,
             });
         }
-
     }
 }

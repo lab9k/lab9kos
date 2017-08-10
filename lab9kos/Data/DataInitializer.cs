@@ -14,7 +14,9 @@ namespace lab9kos.Data
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Gebruiker> _userManager;
         private readonly IConfiguration _configuration;
-        public DataInitializer(ApplicationDbContext context, UserManager<Gebruiker> userManager,IConfiguration configuration)
+
+        public DataInitializer(ApplicationDbContext context, UserManager<Gebruiker> userManager,
+            IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
@@ -40,13 +42,13 @@ namespace lab9kos.Data
                     Email = "Sabine.Braat@digipolis.be",
                     UserName = "Sabine.Braat@digipolis.be"
                 };
-                await _userManager.CreateAsync(hans, _configuration.GetSection("InitialSeedInfo").GetSection("password").Value);
-                await _userManager.CreateAsync(sabine, _configuration.GetSection("InitialSeedInfo").GetSection("password").Value);
+                await _userManager.CreateAsync(hans,
+                    _configuration.GetSection("InitialSeedInfo").GetSection("password").Value);
+                await _userManager.CreateAsync(sabine,
+                    _configuration.GetSection("InitialSeedInfo").GetSection("password").Value);
 
                 await _userManager.AddClaimAsync(hans, new Claim(ClaimTypes.Role, "admin"));
-
             }
-
         }
 
         public async Task InitializeData()
@@ -105,7 +107,6 @@ namespace lab9kos.Data
                 };
 
 
-
                 var adminGebruiker = new Gebruiker
                 {
                     Voornaam = "Hans",
@@ -152,7 +153,7 @@ namespace lab9kos.Data
 
                 var taak = new Taak()
                 {
-                    TaakRealisatieNiveau = TaakRealisatieNiveau.Todo,
+                    TaakRealisatieNiveau = TaakRealisatieNiveau.Needsreview,
                     Beschrijving = "dependencies opruimen, code documenteren, nog veel andere kleine dingen",
                     Titel = "Opruimen website"
                 };
@@ -167,7 +168,8 @@ namespace lab9kos.Data
                     Gebruiker = wim1,
                     Taak = taak
                 };
-                ; _context.TaakGebruikers.Add(taakGebruiker);
+                ;
+                _context.TaakGebruikers.Add(taakGebruiker);
                 _context.TaakGebruikers.Add(taakGebruiker2);
 
                 _context.Taken.Add(taak);
