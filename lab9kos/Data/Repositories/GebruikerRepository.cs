@@ -18,13 +18,13 @@ namespace lab9kos.Data.Repositories
 
         public Gebruiker GetById(long id)
         {
-            return _gebruikers.Where(g => g.Id == id).FirstOrDefault();
+            return _gebruikers.FirstOrDefault(g => g.Id == id);
         }
 
         public Gebruiker GetByEmail(string email) => _gebruikers
             .Include(g => g.Werkweken)
             .Include(g => g.Taken)
-            .First(g => g.Email.Equals(email));
+            .FirstOrDefault(g => g.Email.Equals(email));
 
         public ICollection<Gebruiker> GetAll() => _gebruikers
             .Include(g => g.Werkweken)

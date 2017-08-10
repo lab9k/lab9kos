@@ -11,6 +11,7 @@
     <ApplicationInsightsAnnotationResourceId>/subscriptions/15277707-5908-42b1-a056-00d2c6d23f0f/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/lab9kos</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentEmail.Mailgun" Version="2.1.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />

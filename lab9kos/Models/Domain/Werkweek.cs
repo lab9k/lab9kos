@@ -85,6 +85,12 @@ namespace lab9kos.Models.Domain
 
         public int GetWeekNummer() => DateUtilities.GetIso8601WeekOfYear(StartDatum);
 
+
+        public String ToReadableFormat()
+        {
+            return Werknemer.Voornaam + " " + Werknemer.Naam + " - " + Maandag + " | " 
+                + Dinsdag + " | " +Woensdag + " | " + Donderdag + " | " + Vrijdag + " \n";
+        }
         public int GetYear() => StartDatum.Year;
     }
 }
