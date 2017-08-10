@@ -1,0 +1,20 @@
+﻿@using System
+@using System.Runtime.InteropServices.ComTypes
+@using System.Xml
+@using lab9kos.Models.Domain
+@using lab9kos.Util
+@using Microsoft.AspNetCore.Http
+@inject UserManager<Gebruiker> UserManager
+
+@model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="full-width body-height">
+    <div class="side body-height">
+        <div class="side-content body-height">
+            <a asp-action="VerstuurMail" class="btn btn-outline-primary">Verstuur email</a>
+        </div>
+    </div>
+</div>

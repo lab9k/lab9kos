@@ -78,7 +78,7 @@ namespace lab9kos.Controllers
                 week.Vrijdag = evm.Vrijdag;
                 _werkweekRepository.SaveChanges();
                 TempData["success"] = "Succesvol geëditeerd";
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),new {unixTimeStamp = evm.DateTimeStamp});
             }
             else
             {
