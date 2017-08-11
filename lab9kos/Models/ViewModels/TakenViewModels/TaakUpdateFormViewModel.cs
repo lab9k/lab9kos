@@ -9,10 +9,10 @@ namespace lab9kos.Models.ViewModels.TakenViewModels
         public long Id { get; set; }
         public string Titel { get; set; }
         public string Beschrijving { get; set; }
+        public string Url { get; set; }
 
         public TaakUpdateFormViewModel()
         {
-         
         }
     }
 }

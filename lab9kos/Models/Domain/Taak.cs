@@ -13,6 +13,7 @@ namespace lab9kos.Models.Domain
         public string Beschrijving { get; set; }
         public List<TaakGebruiker> Gebruikers { get; set; }
         public TaakRealisatieNiveau TaakRealisatieNiveau { get; set; }
+        public string Url { get; set; }
 
         public Taak()
         {
@@ -27,7 +28,8 @@ namespace lab9kos.Models.Domain
                 Titel = "Nieuwe Taak",
                 Beschrijving = "Nieuwe Taak",
                 Gebruikers = new List<TaakGebruiker>(),
-                TaakRealisatieNiveau = TaakRealisatieNiveau.Todo
+                TaakRealisatieNiveau = TaakRealisatieNiveau.Todo,
+                Url = "https://www.github.io"
             };
         }
 

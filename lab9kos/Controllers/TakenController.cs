@@ -48,6 +48,7 @@ namespace lab9kos.Controllers
                     var taakToUpdate = _taakRepository.GetBy(tufvm.Id);
                     taakToUpdate.Titel = tufvm.Titel;
                     taakToUpdate.Beschrijving = tufvm.Beschrijving;
+                    taakToUpdate.Url = tufvm.Url;
                     _taakRepository.SaveChanges();
                     TempData["success"] = "success!";
                     return RedirectToAction(nameof(Index));
