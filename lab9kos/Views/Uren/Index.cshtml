@@ -8,7 +8,7 @@
 
 @model lab9kos.Models.ViewModels.UrenViewModels.IndexViewModel
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Uurrooster";
     Layout = "_Layout";
 }
 <div class="full-width body-height">
@@ -23,13 +23,27 @@
                                 var nu = new DateTimeOffset(@Model.Datum).ToUnixTimeSeconds();
                                 var vorige = new DateTimeOffset(@Model.Datum.AddDays(-7)).ToUnixTimeSeconds();
                                 var volgende = new DateTimeOffset(@Model.Datum.AddDays(7)).ToUnixTimeSeconds();
+                                var nuDag = (int) @Model.Datum.DayOfWeek;
+                                if (nuDag == 0)
+                                {
+                                    nuDag = 7;
+                                }
+                                var daysToDecrease = (nuDag - 1) * -1;
+                                var maandag = @Model.Datum.AddDays(daysToDecrease);
+                                var vrijdag = maandag.AddDays(4);
+                                var format = "d ";
+                                var eindeFormat = "d MMMM";
                             }
 
                             <a asp-action="Index" asp-route-unixTimeStamp="@vorige"></a>
-                            Week @nuWeek, @Model.Datum.Year
+                            Week @nuWeek
                             <a asp-action="Index" asp-route-unixTimeStamp="@volgende"></a>
                         </p>
+                        <p style="font-size: 24px">
+                            @maandag.ToString(format) - @vrijdag.ToString(eindeFormat) @Model.Datum.Year
+                        </p>
                     </div>
+
                     <table class="rwd-table">
                         <tr>
                             <th>Naam</th>
