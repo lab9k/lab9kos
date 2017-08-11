@@ -19,7 +19,9 @@ namespace lab9kos.Controllers
         private readonly IWerkweekRepository _werkweekRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly UserManager<Gebruiker> _userManager;
-        public UrenController(IWerkweekRepository werkweekRepository, IGebruikerRepository gebruikerRepository, UserManager<Gebruiker> userManager)
+
+        public UrenController(IWerkweekRepository werkweekRepository, IGebruikerRepository gebruikerRepository,
+            UserManager<Gebruiker> userManager)
         {
             _werkweekRepository = werkweekRepository;
             _gebruikerRepository = gebruikerRepository;
@@ -49,7 +51,6 @@ namespace lab9kos.Controllers
             if (week.Werknemer.Id != Convert.ToInt64(_userManager.GetUserId(User)) && !User.IsInRole("admin"))
             {
                 throw new AuthenticationException("Niet geauthoriseerd");
-
             }
 
             var evm = new EditViewModel()
@@ -70,7 +71,7 @@ namespace lab9kos.Controllers
         {
             if (ModelState.IsValid)
             {
-                Werkweek week = _werkweekRepository.GetById(evm.Id.Value);
+                var week = _werkweekRepository.GetById(evm.Id.Value);
                 week.Maandag = evm.Maandag;
                 week.Dinsdag = evm.Dinsdag;
                 week.Woensdag = evm.Woensdag;
@@ -78,7 +79,7 @@ namespace lab9kos.Controllers
                 week.Vrijdag = evm.Vrijdag;
                 _werkweekRepository.SaveChanges();
                 TempData["success"] = "Succesvol geëditeerd";
-                return RedirectToAction(nameof(Index),new {unixTimeStamp = evm.DateTimeStamp});
+                return RedirectToAction(nameof(Index), new {unixTimeStamp = evm.DateTimeStamp});
             }
             else
             {
@@ -105,7 +106,7 @@ namespace lab9kos.Controllers
                 _werkweekRepository.AddWerkWeek(week);
                 _werkweekRepository.SaveChanges();
                 TempData["success"] = "Succesvol Gemaakt!";
-                return RedirectToAction(nameof(Index), new { unixTimeStamp = evm.DateTimeStamp });
+                return RedirectToAction(nameof(Index), new {unixTimeStamp = evm.DateTimeStamp});
             }
             else
             {

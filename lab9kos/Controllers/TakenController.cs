@@ -52,7 +52,7 @@ namespace lab9kos.Controllers
                     TempData["success"] = "success!";
                     return RedirectToAction(nameof(Index));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     TempData["error"] = "er is iets misgegaan, raadpleeg Jef";
                     return RedirectToAction(nameof(Index));
