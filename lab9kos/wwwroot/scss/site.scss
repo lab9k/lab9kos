@@ -103,7 +103,17 @@ $breakpoint-alpha: 640px;
   }
 }
 
-a {
+.unsubscribe {
+  i {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.subscribe {
   i {
     text-decoration: none;
   }
