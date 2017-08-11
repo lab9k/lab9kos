@@ -25,6 +25,7 @@ namespace lab9kos.Data
 
         public async Task ReleaseInitializeData()
         {
+            _context.Database.EnsureDeleted();
             if (_context.Database.EnsureCreated())
             {
                 var hans = new Gebruiker
