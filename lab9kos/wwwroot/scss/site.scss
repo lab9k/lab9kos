@@ -3,11 +3,13 @@ $black: #000;
 $white: #FFF;
 $body-bg-color: #EEEEEE;
 $side-bg-color: #292b2c;
+$overzicht-bg-color: #b4b4b4;
 $border-tr-color: #ddd;
 $nav-height: 54px;
 $body-height: calc(100vh - #{$nav-height});
 $toggle-button-height: 45px;
 $breakpoint-alpha: 640px;
+$shadow: 10px 10px 20px $side-bg-color;
 
 .margin-right-10 {
   margin-right: 10px;
@@ -158,7 +160,7 @@ $breakpoint-alpha: 640px;
 .rwd-table {
   //margin: 1em 0;
   min-width: 300px;
-  box-shadow: 10px 10px 20px $side-bg-color;
+  box-shadow: $shadow;
   tr {
     border-top: 1px solid $border-tr-color;
     border-bottom: 1px solid $border-tr-color;
@@ -235,3 +237,21 @@ $breakpoint-alpha: 640px;
     color: #dd5;
   }
 }
+
+.overzicht {
+  ol {
+    background-color: $overzicht-bg-color;
+    box-shadow: $shadow;
+    padding: 3rem 6rem;
+    li {
+      margin-top: 30px;
+      font-size: 1.25rem;
+      ul {
+        li {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+

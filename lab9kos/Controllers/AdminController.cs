@@ -118,7 +118,12 @@ namespace lab9kos.Controllers
 
         public IActionResult ToonOverzicht()
         {
-            throw new NotImplementedException();
+            var gebruikers = _gebruikerRepository.GetAll();
+            var viewmodel = new AccountsOverzichtViewModel()
+            {
+                Gebruikers = gebruikers
+            };
+            return View(viewmodel);
         }
     }
 }

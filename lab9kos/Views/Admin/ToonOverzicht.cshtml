@@ -1,0 +1,31 @@
+﻿@model lab9kos.Models.ViewModels.AdminViewModels.AccountsOverzichtViewModel
+
+@{
+    ViewBag.Title = "Accounts overzicht";
+    Layout = "_Layout";
+}
+
+<div class="full-width body-height">
+    <div class="side body-height">
+        <div class="side-content body-height">
+            <div class="overzicht">
+                <ol>
+                    @foreach (var g in Model.Gebruikers)
+                    {
+                        <li>
+                            <ul>
+                                <li>
+                                    <strong>Naam:&nbsp;</strong>@g.FullName()
+                                </li>
+                                <li>
+                                    <strong>Email:&nbsp;</strong>@g.Email
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
