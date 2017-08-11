@@ -157,13 +157,3 @@
         padding: 1em !important; } }
   .rwd-table th, .rwd-table td:before {
     color: #dd5; }
-
-.overzicht ol {
-  background-color: #b4b4b4;
-  box-shadow: 10px 10px 20px #292b2c;
-  padding: 3rem 6rem; }
-  .overzicht ol li {
-    margin-top: 30px;
-    font-size: 1.25rem; }
-    .overzicht ol li ul li {
-      margin: 0; }

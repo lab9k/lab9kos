@@ -237,21 +237,3 @@ $shadow: 10px 10px 20px $side-bg-color;
     color: #dd5;
   }
 }
-
-.overzicht {
-  ol {
-    background-color: $overzicht-bg-color;
-    box-shadow: $shadow;
-    padding: 3rem 6rem;
-    li {
-      margin-top: 30px;
-      font-size: 1.25rem;
-      ul {
-        li {
-          margin: 0;
-        }
-      }
-    }
-  }
-}
-

@@ -9,22 +9,22 @@
     <div class="side body-height">
         <div class="side-content body-height">
             <div class="overzicht">
-                <ol>
+                <table class="rwd-table">
+                    <tr>
+                        <th>Voornaam</th>
+                        <th>Naam</th>
+                        <th>Email</th>
+                    </tr>
                     @foreach (var g in Model.Gebruikers)
                     {
-                        <li>
-                            <ul>
-                                <li>
-                                    <strong>Naam:&nbsp;</strong>@g.FullName()
-                                </li>
-                                <li>
-                                    <strong>Email:&nbsp;</strong>@g.Email
-                                </li>
-                            </ul>
-                        </li>
+                        <tr>
+                            <td data-th="Voornaam">@g.Voornaam</td>
+                            <td data-th="Naam">@g.Naam</td>
+                            <td data-th="Email">@g.Email</td>
+                        </tr>
                     }
 
-                </ol>
+                </table>
             </div>
         </div>
     </div>
