@@ -14,66 +14,68 @@
 <div class="full-width body-height">
     <div class="side body-height">
         <div class="side-content body-height">
+            <div class="index">
+                <div class="week-wrapper">
+                    <div class="week-selector">
+                        <p>
+                            @{
+                                var nuWeek = DateUtilities.GetIso8601WeekOfYear(@Model.Datum);
+                                var nu = new DateTimeOffset(@Model.Datum).ToUnixTimeSeconds();
+                                var vorige = new DateTimeOffset(@Model.Datum.AddDays(-7)).ToUnixTimeSeconds();
+                                var volgende = new DateTimeOffset(@Model.Datum.AddDays(7)).ToUnixTimeSeconds();
+                            }
 
-            <div class="week-wrapper">
-                <div class="week-selector">
-                    <p>
-                        @{
-                            var nuWeek = DateUtilities.GetIso8601WeekOfYear(@Model.Datum);
-                            var nu = new DateTimeOffset(@Model.Datum).ToUnixTimeSeconds();
-                            var vorige = new DateTimeOffset(@Model.Datum.AddDays(-7)).ToUnixTimeSeconds();
-                            var volgende = new DateTimeOffset(@Model.Datum.AddDays(7)).ToUnixTimeSeconds();
-                        }
-
-                        <a asp-action="Index" asp-route-unixTimeStamp="@vorige"></a>
-                        Week @nuWeek, @Model.Datum.Year
-                        <a asp-action="Index" asp-route-unixTimeStamp="@volgende"></a>
-                    </p>
-                </div>
-                <table class="rwd-table">
-                    <tr>
-                        <th>Naam</th>
-                        <th>Maandag</th>
-                        <th>Dinsdag</th>
-                        <th>Woensdag</th>
-                        <th>Donderdag</th>
-                        <th>Vrijdag</th>
-                        <th></th>
-                    </tr>
-                    @{ var userHasHours = false;}
-                    @foreach (var week in Model.Werkweken)
-                    {
-                        <tr>
-                            <td data-th="Naam">@($"{week.Werknemer.Voornaam} {week.Werknemer.Naam}")</td>
-                            <td data-th="Maandag">@week.Maandag</td>
-                            <td data-th="Dinsdag">@week.Dinsdag</td>
-                            <td data-th="Woensdag">@week.Woensdag</td>
-                            <td data-th="Donderdag">@week.Donderdag</td>
-                            <td data-th="Vrijdag">@week.Vrijdag</td>
-                            <td>
-                                @if(User.IsInRole("admin") || Convert.ToInt64(UserManager.GetUserId(User)) == week.Werknemer.Id){
-                                <a asp-action="Edit" asp-route-id=@week.Id>
-                                    <i class="white material-icons">mode_edit</i>
-                                </a>
-                                }
-                            </td>
-                        </tr>
-                        if (Convert.ToInt64(@UserManager.GetUserId(User)) == week.Werknemer.Id)
-                        {
-                            userHasHours = true;
-                        }
-
-                    }
-
-                </table>
-                @if (!userHasHours)
-                {
-                    <br />
-                    <div style="float: right">
-                        <a class="btn btn-outline-primary" asp-action="Create" asp-controller="Uren" asp-route-unixTimeStamp="@nu">Voeg uren toe</a>
+                            <a asp-action="Index" asp-route-unixTimeStamp="@vorige"></a>
+                            Week @nuWeek, @Model.Datum.Year
+                            <a asp-action="Index" asp-route-unixTimeStamp="@volgende"></a>
+                        </p>
                     </div>
-                }
+                    <table class="rwd-table">
+                        <tr>
+                            <th>Naam</th>
+                            <th>Maandag</th>
+                            <th>Dinsdag</th>
+                            <th>Woensdag</th>
+                            <th>Donderdag</th>
+                            <th>Vrijdag</th>
+                            <th></th>
+                        </tr>
+                        @{ var userHasHours = false; }
+                        @foreach (var week in Model.Werkweken)
+                        {
+                            <tr>
+                                <td data-th="Naam">@($"{week.Werknemer.Voornaam} {week.Werknemer.Naam}")</td>
+                                <td data-th="Maandag">@week.Maandag</td>
+                                <td data-th="Dinsdag">@week.Dinsdag</td>
+                                <td data-th="Woensdag">@week.Woensdag</td>
+                                <td data-th="Donderdag">@week.Donderdag</td>
+                                <td data-th="Vrijdag">@week.Vrijdag</td>
+                                <td>
+                                    @if (User.IsInRole("admin") || Convert.ToInt64(UserManager.GetUserId(User)) == week.Werknemer.Id)
+                                    {
+                                        <a asp-action="Edit" asp-route-id=@week.Id>
+                                            <i class="white material-icons">mode_edit</i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                            if (Convert.ToInt64(@UserManager.GetUserId(User)) == week.Werknemer.Id)
+                            {
+                                userHasHours = true;
+                            }
+                        }
+
+                    </table>
+                    @if (!userHasHours)
+                    {
+                        <br/>
+                        <div style="float: right">
+                            <a class="btn btn-outline-primary" asp-action="Create" asp-controller="Uren" asp-route-unixTimeStamp="@nu">Voeg uren toe</a>
+                        </div>
+                    }
+                </div>
             </div>
+
         </div>
         <div class="side-bar full-height">
             <input class="form-control" id="week-search" type="text" placeholder="Search">

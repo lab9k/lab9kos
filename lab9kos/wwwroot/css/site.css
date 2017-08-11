@@ -65,6 +65,9 @@
     color: #EAEAEA;
     max-height: calc(100vh - 54px); }
 
+.index {
+  flex-grow: 2; }
+
 .unsubscribe i {
   text-decoration: none; }
 
