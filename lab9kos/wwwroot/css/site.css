@@ -65,10 +65,10 @@
     color: #EAEAEA;
     max-height: calc(100vh - 54px); }
 
-a i {
+.unsubscribe i {
   text-decoration: none; }
 
-a:visited {
+.unsubscribe:visited {
   text-decoration: none;
   color: inherit; }
 
