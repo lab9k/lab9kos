@@ -113,6 +113,16 @@ $breakpoint-alpha: 640px;
   }
 }
 
+.subscribe {
+  i {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
 .temp-data {
   position: absolute;
   top: $nav-height;
