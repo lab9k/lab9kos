@@ -5,6 +5,7 @@
     <div class="drag-item-visible">
         <h5>@Model.Taak.Titel</h5>
         <p>@Model.Taak.Beschrijving</p>
+        <a href="@Model.Taak.Url" target="_blank">@Model.Taak.Url</a>
     </div>
     <div hidden>
         <div id="dialog-drag-inner-@Model.Taak.Id" title="@Model.Taak.Titel">
@@ -39,7 +40,8 @@
                     {
                         Id = Model.Taak.Id,
                         Titel = Model.Taak.Titel,
-                        Beschrijving = Model.Taak.Beschrijving
+                        Beschrijving = Model.Taak.Beschrijving,
+                        Url = Model.Taak.Url
                     })
                 </div>
             </div>
