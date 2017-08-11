@@ -115,5 +115,10 @@ namespace lab9kos.Controllers
             TempData["error"] = "Er ging iets mis, contacteer Wim";
             return View(vam);
         }
+
+        public IActionResult ToonOverzicht()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
