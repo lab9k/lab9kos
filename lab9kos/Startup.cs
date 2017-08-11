@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -45,8 +45,8 @@ namespace lab9kos
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                //options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
-                    options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
+                // options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
+                  options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
             );
             services.AddIdentity<Gebruiker, IdentityRole<long>>(x =>
                 {
