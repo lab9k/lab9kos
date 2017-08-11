@@ -7,11 +7,9 @@ using FluentEmail.Core;
 using FluentEmail.Mailgun;
 using lab9kos.Models.Domain;
 using lab9kos.Models.ViewModels.AdminViewModels;
-using lab9kos.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
 
 namespace lab9kos.Controllers
@@ -45,21 +43,15 @@ namespace lab9kos.Controllers
             var volgende = DateTime.Now.AddDays(7);
             IList<Werkweek> nuWeken = _werkweekRepository.GetByDate(nu);
             IList<Werkweek> volgendeWeken = _werkweekRepository.GetByDate(volgende);
-            string Inhoud = "Dag Sabine \n\n";
-            Inhoud += "De gepresteerde uren deze week: \n\n";
-            foreach (Werkweek week in nuWeken)
+            var inhoud = "Dag Sabine \n\n";
+            inhoud += "De gepresteerde uren deze week: \n\n";
+            inhoud = nuWeken.Aggregate(inhoud, (current, week) => current + week.ToReadableFormat());
+            inhoud += "\nDe uren voor volgende week: \n\n";
+            inhoud = volgendeWeken.Aggregate(inhoud, (current, week) => current + week.ToReadableFormat());
+            inhoud += "\n Met vriendelijke groeten \n\n Hans Fraiponts";
+            var wvm = new WekenViewModel
             {
-                Inhoud += week.ToReadableFormat();
-            }
-            Inhoud += "\nDe uren voor volgende week: \n\n";
-            foreach (Werkweek week in volgendeWeken)
-            {
-                Inhoud += week.ToReadableFormat();
-            }
-            Inhoud += "\n Met vriendelijke groeten \n\n Hans Fraiponts";
-            WekenViewModel wvm = new WekenViewModel
-            {
-                Inhoud = Inhoud,
+                Inhoud = inhoud,
                 Ontvanger = _configuration.GetSection("Mailgun").GetSection("ontvanger").Value
             };
             return View(wvm);
@@ -68,8 +60,8 @@ namespace lab9kos.Controllers
         [HttpPost]
         public async Task<IActionResult> VerstuurMail(WekenViewModel wvm)
         {
-            String mailgunKey = _configuration.GetSection("Mailgun").GetSection("key").Value;
-            String domain = _configuration.GetSection("Mailgun").GetSection("domain").Value;
+            var mailgunKey = _configuration.GetSection("Mailgun").GetSection("key").Value;
+            var domain = _configuration.GetSection("Mailgun").GetSection("domain").Value;
             if (ModelState.IsValid)
             {
                 var sender = new MailgunSender(
@@ -82,11 +74,12 @@ namespace lab9kos.Controllers
                     .To(wvm.Ontvanger)
                     .Subject("Werkuren Jobstudenten Lab9K")
                     .Body(wvm.Inhoud);
-                var response = await email.SendAsync();
+                await email.SendAsync();
                 return RedirectToAction(nameof(Index));
             }
             else
             {
+                TempData["error"] = "Er ging iets mis, contacteer Wim";
                 return View(wvm);
             }
         }
@@ -101,29 +94,26 @@ namespace lab9kos.Controllers
         {
             if (ModelState.IsValid)
             {
-                Gebruiker g = _gebruikerRepository.GetByEmail(vam.Email);
+                var g = _gebruikerRepository.GetByEmail(vam.Email);
                 if (g != null)
                 {
-                    IList<Claim> claimsUser = await _userManager.GetClaimsAsync(g);
-                    bool isAdmin = claimsUser.FirstOrDefault(c => c.Value == "admin") != null;
+                    var claimsUser = await _userManager.GetClaimsAsync(g);
+                    var isAdmin = claimsUser.FirstOrDefault(c => c.Value == "admin") != null;
                     if (!isAdmin)
                     {
                         await _userManager.AddClaimAsync(g, new Claim(ClaimTypes.Role, "admin"));
                         return RedirectToAction(nameof(Index));
                     }
                     ModelState.AddModelError("GebruikerAlAdmin", "Deze gebruiker is al Admin");
-
+                    TempData["error"] = "Deze gebruiker is al Admin";
                     return View(vam);
                 }
                 ModelState.AddModelError("GebruikerNull", "Deze gebruiker zit niet in het systeem");
+                TempData["error"] = "Deze gebruiker zit niet in het systeem";
                 return View(vam);
             }
-            else
-            {
-                return View(vam);
-
-            }
+            TempData["error"] = "Er ging iets mis, contacteer Wim";
+            return View(vam);
         }
-
     }
 }
