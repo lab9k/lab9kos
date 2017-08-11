@@ -49,7 +49,7 @@
 {
     <div class="alert alert-danger temp-data" role="alert">
         <p>
-            <strong>Oh snap!</strong>&nbsp; Change a few things up and try submitting again.
+            @TempData["error"]
         </p>
         <div class="close">
             <button class="btn btn-outline-danger">
@@ -62,7 +62,7 @@ else if (TempData["success"] != null)
 {
     <div class="alert alert-success temp-data" role="alert">
         <p>
-            <strong>Well done!</strong>&nbsp;You successfully read this important alert message.
+            @TempData["success"]
         </p>
         <div class="close">
             <button class="btn btn-outline-success">

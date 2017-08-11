@@ -72,6 +72,13 @@
   text-decoration: none;
   color: inherit; }
 
+.subscribe i {
+  text-decoration: none; }
+
+.subscribe:visited {
+  text-decoration: none;
+  color: inherit; }
+
 .temp-data {
   position: absolute;
   top: 54px;
