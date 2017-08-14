@@ -46,6 +46,7 @@ namespace lab9kos
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 //  options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"))
+                //options.UseMySql(Configuration.GetConnectionString("MysqlConnection"))
                     options.UseSqlServer(Configuration.GetConnectionString("azureConnection"))
             );
             services.AddIdentity<Gebruiker, IdentityRole<long>>(x =>
